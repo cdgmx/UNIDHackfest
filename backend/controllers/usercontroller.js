@@ -34,6 +34,7 @@ router //for gettin and updating
         .put((req,res) =>{
             try{
                 //updating the qrkey to resetqr
+                
                 //needed the new qrkey
                 let qrkey = req.body.qrkey
                 let client_id = req.body.client_id
