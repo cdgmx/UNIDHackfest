@@ -125,7 +125,6 @@ async function postScanInfo(admin_id,user_id){
         if(rows) {
             // console.log('success')
             return rows
-            
         }
         else{
             // console.log("error here")
@@ -211,17 +210,13 @@ async function regClient(client, values){
         if(client == "users"){sqlInsert= `INSERT INTO users
         (email,name,address,town,province,contact,birthday,password)
         VALUES (?,?,?,?,?,?,?,?)`
-    
         response = await db.execute(sqlInsert,[email,name,address,town,province,contact,birthday,password])
         }
-
         else{sqlInsert = `INSERT INTO admins 
         (email,name,address,town,province,contact,password)
         VALUES (?,?,?,?,?,?,?)`
         response = await db.execute(sqlInsert,[email,name,address,town,province,contact,password])
         }
-         
-        
         if (response){
             return true
         }
@@ -244,6 +239,28 @@ async function updateClient(client, column,value, key,client_id){
         const response = await db.execute(sqlUpdate, [{value},client_id])
         if(response) {
             return true
+            //console.log(results)
+        }
+        else{
+            return null
+        }
+    }
+    catch (error){
+        console.log(error)
+        return null
+    }   
+}
+
+async function getQr(client,key,value){
+    try{
+        const sqlSelect = `SELECT * FROM users WHERE qrkey= ?` 
+        const [rows, fields] = await db.execute(sqlSelect, [value])
+        if(!rows.length == 0) {
+            results = parseData(rows[0])
+            //generating the qr code from the qrkey results given
+            results.qr = await QRCode.toString(results.qrkey,{type:'svg'})
+            
+            return results
             //console.log(results)
         }
         else{

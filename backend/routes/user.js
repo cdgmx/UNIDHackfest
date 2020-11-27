@@ -1,9 +1,18 @@
 const express = require('express')
+const dboperations = require ('./database/dboperations')
 let router = express.Router()
-
+//future purposes, not being used
 router
-    .route('/cars')
-    .get((req,res) =>{
+    .route('/qr')
+    .get(async (req,res) =>{
+
+        try{
+            dboperations.getQr()
+        }
+        catch(error)
+        {
+
+        }
         res.send("get operations")
     })
     .post((req,res) =>{
