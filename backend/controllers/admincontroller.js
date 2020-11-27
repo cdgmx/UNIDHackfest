@@ -51,4 +51,26 @@ router
             res.status(401).send(error);
         }
     })
+    .post(async (req,res) =>{
+        try{
+            //needed client_id, it will select all data from  scanned table where admin_id = client_id
+            //it will only get its own scanned data
+            console.log(req.body)
+            if(!req.body) throw "no data in body"
+            let admin_id =  req.body.admin_id
+            let user_id =  req.body.user_id
+            let data = await dboperations.postScanned(admin_id, user_id)
+            if(data){
+                res.send("success")
+            }
+            else{
+                throw "error in postScanned"
+            }
+        }
+        catch(error) {
+            console.log(error)
+            res.status(401).send(error);
+        }
+    })
+
 module.exports = router

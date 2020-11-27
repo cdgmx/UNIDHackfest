@@ -155,10 +155,10 @@ async function deleteTokens(token){
 }
 
 
-async function postScanInfo(admin_id,user_id){
+async function postScanned(admin_id,user_id){
     try{
-        
         //creating the dates
+        console.log(admin_id,user_id)
         var now = new Date();
         var day = dateFormat(now,"d")
         var month = dateFormat(now,"m")
@@ -291,7 +291,7 @@ module.exports = {
     getClientInfo: getClientInfo,
     checkTokens: checkTokens,
     updateTokens:updateTokens,
-    postScanInfo:postScanInfo,
+    postScanned:postScanned,
     getPermission:getPermission,
     getScanned:getScanned,
     deleteTokens:deleteTokens,
