@@ -44,6 +44,54 @@ async function getClientInfo(client,key,value){
         }   
 }
 
+async function postClientInfo(client, values){
+    try{
+        var response = null
+        var sqlInsert = null
+        const {email,name,address,town,province,contact,birthday,password} = values
+        console.log(values)
+        if(client == "user"){sqlInsert= `INSERT INTO users
+        (email,name,address,town,province,contact,birthday,password)
+        VALUES (?,?,?,?,?,?,?,?)`
+        response = await db.execute(sqlInsert,[email,name,address,town,province,contact,birthday,password])
+        }
+        else{sqlInsert = `INSERT INTO admins 
+        (email,name,address,town,province,contact,password)
+        VALUES (?,?,?,?,?,?,?)`
+        response = await db.execute(sqlInsert,[email,name,address,town,province,contact,password])
+        }
+        if (response){
+            return true
+        }
+        else{
+            return null
+        }
+    }
+    catch(error){
+        console.log(error)
+        return null
+    }
+}
+
+async function putClientInfo(client, column,value, key,client_id){
+    try{
+        //client DB{users, admins} column{address, name, bday} key ={thing you want to match}
+        const sqlUpdate = `UPDATE ${client} SET ${column} = ? WHERE ${key} = ?` 
+        const response = await db.execute(sqlUpdate, [{value},client_id])
+        if(response) {
+            return true
+            //console.log(results)
+        }
+        else{
+            return null
+        }
+    }
+    catch (error){
+        console.log(error)
+        return null
+    }   
+}
+
 async function checkTokens(token){
     try{
         const sqlSelect = `SELECT * FROM tokens WHERE token = ?` 
@@ -142,9 +190,9 @@ async function postScanInfo(admin_id,user_id){
 async function getScanned(client_id,key,info_id,client){ //per admin
     try{
         //proxy for testing
-        client_id = "zcasf"
-        key = "admin_id"
-        info_id ="user_id"
+        // client_id = "zcasf"
+        // key = "admin_id"
+        // info_id ="user_id"
 
 
         const sqlSelect = `SELECT * FROM scanned WHERE ${key} = ?` 
@@ -171,7 +219,7 @@ async function getScanned(client_id,key,info_id,client){ //per admin
 
               
             //   rows[0].user_id = {"test":1}
-            console.log("x")
+            // console.log("x")
            
             return x
         }
@@ -200,56 +248,9 @@ async function getPermission(client_id){ //per admin
     }   
 }
 
-async function regClient(client, values){
-    //resting all of data comming from columns
-    try{
-        var response = null
-        var sqlInsert = null
-        const {email,name,address,town,province,contact,birthday,password} = values
-        console.log(values)
-        if(client == "users"){sqlInsert= `INSERT INTO users
-        (email,name,address,town,province,contact,birthday,password)
-        VALUES (?,?,?,?,?,?,?,?)`
-        response = await db.execute(sqlInsert,[email,name,address,town,province,contact,birthday,password])
-        }
-        else{sqlInsert = `INSERT INTO admins 
-        (email,name,address,town,province,contact,password)
-        VALUES (?,?,?,?,?,?,?)`
-        response = await db.execute(sqlInsert,[email,name,address,town,province,contact,password])
-        }
-        if (response){
-            return true
-        }
-        else{
-            return null
-        }
-    }
-    catch(error){
-        console.log(error)
-        return null
-    }
 
 
-}
 
-async function updateClient(client, column,value, key,client_id){
-    try{
-        //client DB{users, admins} column{address, name, bday} key ={thing you want to match}
-        const sqlUpdate = `UPDATE ${client} SET ${column} = ? WHERE ${key} = ?` 
-        const response = await db.execute(sqlUpdate, [{value},client_id])
-        if(response) {
-            return true
-            //console.log(results)
-        }
-        else{
-            return null
-        }
-    }
-    catch (error){
-        console.log(error)
-        return null
-    }   
-}
 
 async function getQr(client,key,value){
     try{
@@ -282,8 +283,8 @@ module.exports = {
     getPermission:getPermission,
     getScanned:getScanned,
     deleteTokens:deleteTokens,
-    regClient:regClient,
-    updateClient:updateClient
+    postClientInfo:postClientInfo,
+    putClientInfo:putClientInfo
 }
 
 
