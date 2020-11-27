@@ -1,0 +1,156 @@
+
+
+
+.App {
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  
+  .Qr svg {
+    position: relative;
+    justify-content: center;
+    width: 300px;
+    height: 300px;
+    background-color: aqua;
+  }
+  
+  
+  .loginbox{
+   
+    align-items: center;
+    justify-content: center;
+    width: 320px;
+    height: 420px;
+    background: white;
+    color: white;
+    top: 30%;
+    left: 40%;
+    position: absolute;
+    
+   
+   
+   
+  }
+  
+  .avatar{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+  }
+  
+  .loginbox h1{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+  }
+  
+  .loginbox p{
+    margin: 0;
+    padding: 0;
+    color: black;
+  }
+  
+  .loginbox input{
+    color: black;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .loginbox input[type="text"], input[type="password"]
+  {
+    border: none;
+    border-bottom: 1px solid grey;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: black;
+    font-size: 16px;
+  }
+  .loginbox input[type="button"]
+  {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: cyan;
+    color: white;
+    font-size: 18px;
+    border-radius: 20px;
+  }
+  .loginbox input[type="button"]:hover
+  {
+    cursor: pointer;
+    background: black;
+    color: cyan;
+  }
+  .loginbox a{
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: darkgrey;
+  }
+  
+  .loginbox a:hover
+  {
+    color: grey; 
+  }
+  
+  .loginbox b:
+  {
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: cyan;
+  }
+  
+  .login b:hover
+  {
+    color: cyan;
+  }
+  
+  
+  
+  
+  
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

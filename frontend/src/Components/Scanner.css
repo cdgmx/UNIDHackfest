@@ -1,0 +1,14 @@
+
+.box{
+    
+    width: 320px;
+    height: auto;
+    top: 20%;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    position: absolute;
+    padding: 10px;
+    border: 2px solid blue;
+    border-radius: 20px;
+    }
