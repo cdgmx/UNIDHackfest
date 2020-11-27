@@ -15,6 +15,10 @@ var controller = require("./controllers/pagecontrollers");
 
 app.use("/", controller);
 
+app.use("/user", usercontroller);
+
+app.use("/admin", admincontroller);
+
 app.listen(process.env.PORT || 3001, (err) => {
   if (
     (err) => {
