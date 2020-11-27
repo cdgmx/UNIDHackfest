@@ -9,9 +9,6 @@ const jwt = require ("jsonwebtoken")
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
-const dboperations = require ('./database/dboperations')
-const routeUser = require(`./routes/user.js`)
-
 app.use(cors({ origin: true, credentials: true }))
 app.use(bodyParser.urlencoded({extend: true}));
 app.use(express.json())

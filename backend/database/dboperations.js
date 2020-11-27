@@ -24,12 +24,16 @@ async function getClientInfo(client,key,value){
         try{
             // let client ="users"
             // let client_id = "qwerqwe"
+
+            if(!client || !key || !value) throw "one of paramenters is null"
+
             const sqlSelect = `SELECT * FROM ${client} WHERE ${key} = ?` 
             const [rows, fields] = await db.execute(sqlSelect, [value])
             if(!rows.length == 0) {
                 results = parseData(rows[0])
-                //generating the qr code from the qrkey results given
-                results.qr = await QRCode.toString(results.qrkey,{type:'svg'})
+                //generating the qr code from the qrkey results given only for users
+                if(client != "admins") results.qr = await QRCode.toString(results.qrkey,{type:'svg'})
+                
                 
                 return results
                 //console.log(results)
@@ -46,6 +50,7 @@ async function getClientInfo(client,key,value){
 
 async function postClientInfo(client, values){
     try{
+        if(!client || values) throw "one of paramenters is null"
         var response = null
         var sqlInsert = null
         const {email,name,address,town,province,contact,birthday,password} = values
@@ -75,9 +80,10 @@ async function postClientInfo(client, values){
 
 async function putClientInfo(client, column,value, key,client_id){
     try{
+        if(!client || column||value|| key||client_id) throw "one of paramenters is null"
         //client DB{users, admins} column{address, name, bday} key ={thing you want to match}
         const sqlUpdate = `UPDATE ${client} SET ${column} = ? WHERE ${key} = ?` 
-        const response = await db.execute(sqlUpdate, [{value},client_id])
+        const response = await db.execute(sqlUpdate, [value,client_id])
         if(response) {
             return true
             //console.log(results)
@@ -94,6 +100,8 @@ async function putClientInfo(client, column,value, key,client_id){
 
 async function checkTokens(token){
     try{
+        if(!token) throw "one of paramenters is null"
+
         const sqlSelect = `SELECT * FROM tokens WHERE token = ?` 
         const [rows, fields] = await db.execute(sqlSelect, [token])
         if(!rows.length == 0) {
@@ -217,11 +225,12 @@ async function getScanned(client_id,key,info_id,client){ //per admin
                 return preresults[index]
               }))
 
-              
+              if(x) return x
+              else throw "Error in promise"
             //   rows[0].user_id = {"test":1}
             // console.log("x")
            
-            return x
+            
         }
         //console.log(results)
     }
