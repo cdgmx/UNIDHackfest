@@ -4,11 +4,7 @@ const express = require("express");
 const router = express.Router();
 
 const mysql = require("mysql");
-const app = express();
-const jwt = require("jsonwebtoken");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
-const dboperations = require("../database/dboperations");
+
 
 app.use(cors({ origin: true, credentials: true }));
 app.use(cookieParser());
