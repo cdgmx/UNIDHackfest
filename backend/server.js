@@ -14,11 +14,14 @@ app.use(express.urlencoded({ extended: true }));
 var controller = require("./controllers/pagecontrollers");
 var usercontroller = require("./controllers/usercontroller");
 var admincontroller = require("./controllers/admincontroller");
+var formController = require("./controllers/formController");
 app.use("/", controller);
 
 app.use("/user", usercontroller);
 
 app.use("/admin", admincontroller);
+
+app.use("/form", formController);
 
 app.listen(process.env.PORT || 3001, (err) => {
   if (

@@ -79,5 +79,4 @@ router
             res.status(401).send(error);
         }
     })
-
 module.exports = router
