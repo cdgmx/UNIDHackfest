@@ -1,0 +1,79 @@
+.landingpage-form {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 500px;
+  width: 400px;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 3px 3px 5px 6px rgb(231, 231, 231);
+  -moz-box-shadow: 3px 3px 5px 6px rgb(231, 231, 231);
+  box-shadow: 3px 3px 5px 6px rgb(231, 231, 231);
+  border-radius: 5px;
+}
+.login-label {
+  position: absolute;
+  font-family: verdana;
+  font-size: 15px;
+  font-weight: normal;
+  transform: translateX(-50%);
+  left: 50%;
+}
+.login-input {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  height: 40px;
+  width: 250px;
+  border: none;
+  border-bottom: 1px black solid;
+  outline: none;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  font-family: verdana;
+  font-size: 15px;
+  font-weight: normal;
+  color: grey;
+}
+
+.username-label {
+  top: 75px;
+}
+.username-input {
+  top: 100px;
+}
+.password-label {
+  top: 200px;
+}
+.password-input {
+  top: 225px;
+}
+
+.login-btn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 30%;
+  font-family: verdana;
+  font-size: 15px;
+  font-weight: normal;
+  height: 35px;
+  width: 100px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  -webkit-box-shadow: 1px 1px 2px 2px rgb(231, 231, 231);
+  -moz-box-shadow: 1px 1px 2px 2px rgb(231, 231, 231);
+  box-shadow: 1px 1px 2px 2px rgb(231, 231, 231);
+}
+.login-btn:hover {
+  -webkit-box-shadow: 1px 1px 1px 1px rgb(231, 231, 231);
+  -moz-box-shadow: 1px 1px 1px 1px rgb(231, 231, 231);
+  box-shadow: 1px 1px 1px 1px rgb(231, 231, 231);
+}
+.gotosignup {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  transform: translateX(-50%);
+}

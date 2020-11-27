@@ -12,12 +12,14 @@ app.use(express.urlencoded({ extended: true }));
 
 //routing
 var controller = require("./controllers/pagecontrollers");
+var usercontroller = require("./controllers/usercontroller");
+// var admincontroller = require("./controllers/admincontroller");
 
 app.use("/", controller);
 
 app.use("/user", usercontroller);
 
-app.use("/admin", admincontroller);
+// app.use("/admin", admincontroller);
 
 app.listen(process.env.PORT || 3001, (err) => {
   if (

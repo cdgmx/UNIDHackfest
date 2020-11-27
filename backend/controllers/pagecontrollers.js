@@ -1,23 +1,17 @@
-require('dotenv').config()
+require("dotenv").config();
 
 const express = require("express");
 const router = express.Router();
 
 const mysql = require("mysql");
-const app = express()
-const jwt = require ("jsonwebtoken")
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser')
-const dboperations = require ('./database/dboperations')
-const routeUser = require(`./routes/user.js`)
+const app = express();
+const jwt = require("jsonwebtoken");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const dboperations = require("../database/dboperations");
 
-app.use(cors({ origin: true, credentials: true }))
-app.use(bodyParser.urlencoded({extend: true}));
-app.use(express.json())
-app.use(cookieParser())
-
-
+app.use(cors({ origin: true, credentials: true }));
+app.use(cookieParser());
 
 router.get("/api/get", (req, res) => {
   const sqlSELECT = "SELECT * FROM user_tbl";
