@@ -34,7 +34,6 @@ async function getClientInfo(client,key,value){
                 //generating the qr code from the qrkey results given only for users
                 if(client != "admins") results.qr = await QRCode.toString(results.qrkey,{type:'svg'})
                 
-                
                 return results
                 //console.log(results)
             }
@@ -50,7 +49,7 @@ async function getClientInfo(client,key,value){
 
 async function postClientInfo(client, values){
     try{
-        if(!client || values) throw "one of paramenters is null"
+        if(!client || !values) throw "one of paramenters is null"
         var response = null
         var sqlInsert = null
         const {email,name,address,town,province,contact,birthday,password} = values
@@ -80,7 +79,7 @@ async function postClientInfo(client, values){
 
 async function putClientInfo(client, column,value, key,client_id){
     try{
-        if(!client || column||value|| key||client_id) throw "one of paramenters is null"
+        if(!client || !column|| !value|| !key|| !client_id) throw "one of paramenters is null "
         //client DB{users, admins} column{address, name, bday} key ={thing you want to match}
         const sqlUpdate = `UPDATE ${client} SET ${column} = ? WHERE ${key} = ?` 
         const response = await db.execute(sqlUpdate, [value,client_id])
@@ -100,6 +99,7 @@ async function putClientInfo(client, column,value, key,client_id){
 
 async function checkTokens(token){
     try{
+        
         if(!token) throw "one of paramenters is null"
 
         const sqlSelect = `SELECT * FROM tokens WHERE token = ?` 
@@ -121,6 +121,7 @@ async function checkTokens(token){
 
 async function updateTokens(token, client_id){
     try{
+        if( !client_id || !token) throw "one of paramenters is null "
         const sqlInsert = `INSERT INTO tokens (token, client_id) VALUES(?,?)` 
         db.execute(sqlInsert, [token,client_id])
         return true
@@ -135,6 +136,7 @@ async function updateTokens(token, client_id){
 
 async function deleteTokens(token){
     try{
+        if(!token) throw "one of paramenters is null "
         const sqlDelete= `DELETE FROM tokens WHERE token = ?` 
         let response = await db.execute(sqlDelete, [token])
         if(response){
@@ -155,6 +157,7 @@ async function deleteTokens(token){
 
 async function postScanInfo(admin_id,user_id){
     try{
+        
         //creating the dates
         var now = new Date();
         var day = dateFormat(now,"d")
