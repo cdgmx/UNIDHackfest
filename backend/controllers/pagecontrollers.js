@@ -1,0 +1,117 @@
+require('dotenv').config()
+
+const express = require("express");
+const router = express.Router();
+
+const mysql = require("mysql");
+const app = express()
+const jwt = require ("jsonwebtoken")
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
+const dbopertions = require ('./DB/dboperations')
+const user = require(`./routes/user.js`)
+
+app.use(cors({ origin: true, credentials: true }))
+app.use(bodyParser.urlencoded({extend: true}));
+app.use(express.json())
+app.use(cookieParser())
+
+
+app.use('/user, user')
+
+
+
+app.post("/resetQR", authToken, async(req, res)=>{
+  let client_id = req.client_id
+  let permission = req.permission
+  let client = null
+  var qrkey = Math.floor((Math.random() * 1000) + 1);
+  console.log("get info")
+  if(permission != 1){
+      client = "users"
+  }
+  else client = "admins"
+  
+  
+  try{
+      console.log("qr here")
+  let data = await dbopertions.updateClient(client,'qrkey',qrkey,'client_id',client_id)
+      if(data){
+         
+          let qr = await QRCode.toString(`${qrkey}`,{type:'svg'})
+          res.send({qr:qr})
+      }
+      else{
+          throw "error in updateClient"
+      }
+
+  }
+  catch (error){
+      console.log(error)
+      res.status(401).send({message:"Something is wrong in your token verify"});
+  }
+})
+
+
+
+
+
+
+router.get("/api/get", (req, res) => {
+  const sqlSELECT = "SELECT * FROM user_tbl";
+  db.query(sqlSELECT, (err, result) => {
+    res.send(result);
+  });
+});
+
+router.post("/signuppage/submit", (req, res) => {
+  const fname = req.body.fname;
+  const mname = req.body.mname;
+  const lname = req.body.lname;
+  const age = req.body.age;
+  const birthday = req.body.birthday;
+  const birthmonth = req.body.birthmonth;
+  const birthyear = req.body.birthyear;
+  const gender = req.body.gender;
+  const email = req.body.email;
+  const contactno = req.body.contactno;
+  const barangay = req.body.barangay;
+  const zone = req.body.zone;
+  const town = req.body.town;
+  const province = req.body.province;
+  const city = req.body.city;
+  const region = req.body.region;
+  const username = req.body.username;
+  const password = req.body.password;
+  const sqlInsert =
+    "INSERT INTO user_tbl (fname,mname,lname,age,birthday,birthmonth,birthyear,gender,email,contactno,barangay,zone,town,province,city,region,username,password) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+  db.query(
+    sqlInsert,
+    [
+      fname,
+      mname,
+      lname,
+      age,
+      birthday,
+      birthmonth,
+      birthyear,
+      gender,
+      email,
+      contactno,
+      barangay,
+      zone,
+      town,
+      province,
+      city,
+      region,
+      username,
+      password,
+    ],
+    (error, result) => {
+      console.log(error);
+    }
+  );
+});
+
+module.exports = router;
