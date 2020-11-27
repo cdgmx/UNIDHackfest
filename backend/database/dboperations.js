@@ -220,7 +220,6 @@ async function getScanned(client_id,key,info_id,client){ //per admin
                     preresults[index].town = dataGetClientInfo.town
                     preresults[index].province = dataGetClientInfo.province
                     preresults[index].contact = dataGetClientInfo.contact
-
                 }
                 else{
                     console.log("dataGetClientInfo")

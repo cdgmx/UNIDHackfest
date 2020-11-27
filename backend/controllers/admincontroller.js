@@ -53,18 +53,25 @@ router
     })
     .post(async (req,res) =>{
         try{
-            //needed client_id, it will select all data from  scanned table where admin_id = client_id
+            //needed client_id and qr_key
             //it will only get its own scanned data
             console.log(req.body)
             if(!req.body) throw "no data in body"
-            let admin_id =  req.body.admin_id
-            let user_id =  req.body.user_id
-            let data = await dboperations.postScanned(admin_id, user_id)
-            if(data){
-                res.send("success")
+            let admin_id =  req.body.client_id
+            let qrkey = req.body.qrkey
+            let response = await dboperations.getClientInfo("users",'qrkey',qrkey)
+            if(response){
+                let user_id =  response.client_id
+                let data = await dboperations.postScanned(admin_id, user_id)
+                if(data){
+                    res.send("success")
+                }
+                else{
+                    throw "error in postScanned"
+                }
             }
             else{
-                throw "error in postScanned"
+                throw "user is not in DB"
             }
         }
         catch(error) {
