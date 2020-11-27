@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //routing
 var controller = require("./controllers/pagecontrollers");
+
 app.use("/", controller);
 
 app.listen(process.env.PORT || 3001, (err) => {
