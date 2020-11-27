@@ -1,10 +1,14 @@
 
-//future purposes, not being used
 
+const express = require("express");
+const router = express.Router();
 var client = "users"
 var client_id = "qwerqwe"
 // var qrkey = "135"
 var QRCode = require('qrcode');
+const dboperations = require("../database/dboperations");
+
+
 
 router //for gettin and updating
     .route('/qr')
@@ -81,7 +85,7 @@ router
         }
     })
 module.exports = router
-=======
+
   .route("/qr")
   .get(async (req, res) => {
     try {
