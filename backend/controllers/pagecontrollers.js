@@ -6,9 +6,6 @@ const router = express.Router();
 const mysql = require("mysql");
 
 
-app.use(cors({ origin: true, credentials: true }));
-app.use(cookieParser());
-
 router.get("/api/get", (req, res) => {
   const sqlSELECT = "SELECT * FROM user_tbl";
   db.query(sqlSELECT, (err, result) => {

@@ -14,8 +14,6 @@ app.use(express.urlencoded({ extended: true }));
 var controller = require("./controllers/pagecontrollers");
 var usercontroller = require("./controllers/usercontroller");
 // var admincontroller = require("./controllers/admincontroller");
-
-
 app.use("/", controller);
 
 app.use("/user", usercontroller);
