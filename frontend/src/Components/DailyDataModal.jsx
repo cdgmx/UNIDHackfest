@@ -3,61 +3,107 @@ import "../Components/Styles/DailyDataModal.css";
 
 class DailyDataModal extends Component {
   render() {
-    const { setModal /*data*/ } = this.props;
+    const { setModal, datalist } = this.props;
     return (
       <div className="modal-div">
-        <button
-          type="button"
-          className="closemodal-btn"
-          // onClick={() => console.log(data)}
-          onClick={() => {
-            setModal(null);
-          }}
-        >
-          &times;
-        </button>
+        <div className="closemodalbtn-div">
+          <button
+            type="button"
+            className="closemodal-btn"
+            // onClick={() => console.log(data)}
+            onClick={() => {
+              setModal(null);
+              console.log("THIS IS DATA!!!!");
+              console.log(JSON.stringify(datalist));
+            }}
+          >
+            &times;
+          </button>
+        </div>
         <div className="modaldetails-div">
-          <input type="text" name="" value="Name" readOnly />
           <input
             type="text"
             name=""
+            value={datalist.admin_id}
+            className="dailymodal-input"
+            readOnly
+          />
+          <input
+            type="text"
+            name=""
+            className="dailymodal-input"
             value={/*data.gender*/ "Gender"}
             readOnly
           />
           <input
             type="text"
             name=""
+            className="dailymodal-input"
             value={
               /*${data.birthmonth} ${data.birthday} ${data.birthyear}*/ "Birthday"
             }
             readOnly
           />
-          <input type="text" name="" value={/*data.age*/ "Age"} readOnly />
-          <input type="text" name="" value={/*data.email*/ "email"} readOnly />
           <input
             type="text"
             name=""
+            value={/*data.age*/ "Age"}
+            className="dailymodal-input"
+            readOnly
+          />
+          <input
+            type="text"
+            name=""
+            value={/*data.email*/ "email"}
+            className="dailymodal-input"
+            readOnly
+          />
+          <input
+            type="text"
+            name=""
+            className="dailymodal-input"
             value={/*data.contactno*/ "contactno"}
             readOnly
           />
           <input
             type="text"
             name=""
+            className="dailymodal-input"
             value={/*data.barangay*/ "barangay"}
             readOnly
           />
-          <input type="text" name="" value={/*data.zone*/ "zone"} readOnly />
-          <input type="text" name="" value={/*data.town*/ "town"} readOnly />
           <input
             type="text"
             name=""
+            className="dailymodal-input"
+            value={/*data.zone*/ "zone"}
+            readOnly
+          />
+          <input
+            type="text"
+            name=""
+            className="dailymodal-input"
+            value={/*data.town*/ "town"}
+            readOnly
+          />
+          <input
+            type="text"
+            name=""
+            className="dailymodal-input"
             value={/*data.province*/ "province"}
             readOnly
           />
-          <input type="text" name="" value={/*data.city*/ "city"} readOnly />
           <input
             type="text"
             name=""
+            className="dailymodal-input"
+            value={/*data.city*/ "city"}
+            readOnly
+          />
+          <input
+            type="text"
+            name=""
+            className="dailymodal-input"
             value={/*data.region*/ "region"}
             readOnly
           />

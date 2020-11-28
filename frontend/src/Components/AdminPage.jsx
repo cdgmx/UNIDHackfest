@@ -76,39 +76,43 @@ const AdminPage = () => {
     <React.Fragment>
       <div className="admin-div">
         <div className="topnav">
-          <button
-            type="button"
-            className="topnav-btn"
-            id="newscan-btn"
-            onClick={newScanHandler}
-          >
-            New Scan
-          </button>
-          <button
-            type="button"
-            className="topnav-btn"
-            id="viewlog-btn"
-            onClick={viewLogHandler}
-          >
-            View Log
-          </button>
-          <button
-            type="button"
-            className="topnav-btn"
-            id="adminprofile-btn"
-            onClick={adminProfileHandler}
-          >
-            Admin Profile
-          </button>
+          <div className="topnavbtns">
+            <button
+              type="button"
+              className="topnav-btn"
+              id="newscan-btn"
+              onClick={newScanHandler}
+            >
+              New Scan
+            </button>
+            <button
+              type="button"
+              className="topnav-btn"
+              id="viewlog-btn"
+              onClick={viewLogHandler}
+            >
+              View Log
+            </button>
+          </div>
+          <div className="topnavbtns">
+            <button
+              type="button"
+              className="topnav-btn"
+              id="adminprofile-btn"
+              onClick={adminProfileHandler}
+            >
+              Admin Profile
+            </button>
 
-          <button
-            type="button"
-            className="topnav-btn"
-            id="adminlogout-btn"
-            onClick={adminLogoutHandler}
-          >
-            Logout
-          </button>
+            <button
+              type="button"
+              className="topnav-btn"
+              id="adminlogout-btn"
+              onClick={adminLogoutHandler}
+            >
+              Logout
+            </button>
+          </div>
         </div>
         <div className="main-div">
           {display === null ? <NewScan /> : display}

@@ -3,8 +3,6 @@ import "../Components/Styles/HistoryModal.css";
 import auth from "../auth";
 import { Chrono } from "react-chrono";
 const HistoryModal = ({ setHistoryModal }) => {
-
-
   const [history, setHistory] = useState([]);
   const [items, setItems] = useState([
     {
@@ -15,28 +13,22 @@ const HistoryModal = ({ setHistoryModal }) => {
   ]);
   const [loading, setLoading] = useState(false);
 
-
-
   // const items = [{}]
 
   const handleHistory = async () => {
-    
-
-
-      const isAuth = await auth.isAuthenticated();
-      console.log("auth Done");
-      console.log(isAuth);
-      if (isAuth){
-        await auth.getHistory(()=>{
-          console.log(auth.scannedData)
-           if(auth.scannedData){
-             setHistory(auth.scannedData)
-              setLoading(true)
-          }
-        })
-      }     
+    const isAuth = await auth.isAuthenticated();
+    console.log("auth Done");
+    console.log(isAuth);
+    if (isAuth) {
+      await auth.getHistory(() => {
+        console.log(auth.scannedData);
+        if (auth.scannedData) {
+          setHistory(auth.scannedData);
+          setLoading(true);
+        }
+      });
+    }
   };
-
 
   useEffect(() => {
     handleHistory();
@@ -57,7 +49,7 @@ const HistoryModal = ({ setHistoryModal }) => {
           cardTitle: `${history[index].name} `,
           cardSubtitle: `${history[index].name}`,
         };
-      })
+      });
 
       setItems(historyData);
       setLoading(true);
@@ -65,14 +57,9 @@ const HistoryModal = ({ setHistoryModal }) => {
     setData();
   }, [history]);
 
-
-
-
   return (
     <div className="historymodal-div">
       <div className="historyModalClosebtn-div">
-
-
         <button
           className="historyModalClosebtn"
           type="button"
@@ -83,15 +70,18 @@ const HistoryModal = ({ setHistoryModal }) => {
           &times;
         </button>
       </div>
-      <div className="history-div"> 
-      
-     
-        { loading ? <div  className = ".history-main " style={{width: "700px", height: "520px" }}> <Chrono items={items}  mode="VERTICAL"  hideControls /> ) 
-            </div>
-          : <></>
-        }
-             
-            </div>
+      <div className="history-div">
+        {loading ? (
+          <div
+            className="history-main "
+            style={{ width: "100%", height: "520px" }}
+          >
+            <Chrono items={items} mode="VERTICAL" hideControls /> )
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 };

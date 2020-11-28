@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import "../Components/Styles/ViewLog.css";
 import DailyDataModal from "../Components/DailyDataModal";
 import Axios from "axios";
-import auth from '../auth'
-import Scan from '../Scan'
+import auth from "../auth";
+import Scan from "../Scan";
 
 const ViewLog = () => {
   const [dataList, setDataList] = useState([]);
@@ -15,45 +15,33 @@ const ViewLog = () => {
   //   setDataList(["dasdasdas", "", "", "", "", "", "", "", "", ""]); //simulate lang nga may unod kuno
   // }, []);
 
-  const handleGetScan = async() =>{
-
-    const isAuth = await auth.isAuthenticated()
-    console.log("auth Done")
-    if(isAuth){
-    auth.getScanData(()=>{
-        console.log("retrieving")
+  const handleGetScan = async () => {
+    const isAuth = await auth.isAuthenticated();
+    console.log("auth Done");
+    if (isAuth) {
+      auth.getScanData(() => {
+        console.log("retrieving");
         // let x = Object.assign({},auth.scannedData)
         // auth.scannedData
 
-      
-        setDataList(auth.scannedData)
-        console.log(auth.scannedData)
-        
-        
-    })
+        setDataList(auth.scannedData);
+        console.log(auth.scannedData);
+      });
     }
-
-  
- 
-}
-
-
-
+  };
 
   // useEffect to fetch data from backend everytime the page is showing
-  useEffect(() => { //gin comment ko danay kay ga error sa. need ko abi ma access ang page para maka design
-    async function info (){
-      await auth.getInfoAdmin(()=>{   
-          console.log("auth.info.name")
-          console.log(auth.info)
-       })
-      }
-      info()
-    handleGetScan()
-
+  useEffect(() => {
+    //gin comment ko danay kay ga error sa. need ko abi ma access ang page para maka design
+    async function info() {
+      await auth.getInfoAdmin(() => {
+        console.log("auth.info.name");
+        console.log(auth.info);
+      });
+    }
+    info();
+    handleGetScan();
   }, []);
-
-
 
   const expandViewHandler = () => {
     setModal(
@@ -61,9 +49,12 @@ const ViewLog = () => {
         setModal={
           setModal
         } /*data={dataList} muni ang halin sa useEffect Axios*/
+        // datalist={JSON.stringify(dataList)}
+        datalist={dataList}
       />
     );
-
+    console.log("THIS IS DATAAA!");
+    console.log(JSON.stringify(dataList));
     // console.log("clicked");
   }; //click to view DailyDataModal
 
@@ -77,16 +68,9 @@ const ViewLog = () => {
         {dataList.map((
           dl //this will create the div depending on the number of scanned
         ) => (
-          <div
-            key={dl.id}
-            className="data-div"
-            onClick={expandViewHandler}
-          >
+          <div key={dl.id} className="data-div" onClick={expandViewHandler}>
             <div className="name-div">
-              <p className="name-p">
-                {`${dl.name}`}
-              
-              </p>
+              <p className="name-p">{`${dl.name}`}</p>
             </div>
 
             <div className="userdetails-div">
@@ -96,18 +80,9 @@ const ViewLog = () => {
                 <div className="detailtype-div3">Gender :</div>
               </div>
               <div className="detail-div">
-                <div className="detail-div1">
-                {`${dl.date}`}
-                
-                </div>
-                <div className="detail-div2">
-                  {dl.age}
-                  
-                </div>
-                <div className="detail-div3">
-                   {dl.gender} 
-                  
-                </div>
+                <div className="detail-div1">{`${dl.date}`}</div>
+                <div className="detail-div2">{dl.age}</div>
+                <div className="detail-div3">{dl.gender}</div>
               </div>
             </div>
           </div>
