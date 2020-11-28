@@ -57,9 +57,8 @@ const HistoryModal = ({ setHistoryModal }) => {
           cardTitle: `${history[index].name} `,
           cardSubtitle: `${history[index].name}`,
         };
-      });
-      console.log("----------------------------------");
-      console.log(historyData);
+      })
+
       setItems(historyData);
       setLoading(true);
     }

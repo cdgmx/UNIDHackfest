@@ -195,8 +195,9 @@ class Auth{
             this.authenticated = true
             this.client_id = response.data.client_id
             this.permission = response.data.permission
-
-            if(this.permission = "0") { 
+            console.log("permission ")
+                console.log(this.permission)
+            if(this.permission == "0") { 
                 this.accountType = "user"}
             else{
                 this.accountType = "admin"
@@ -219,8 +220,9 @@ class Auth{
                 this.client_id = response.data.client_id 
 
                 this.permission = response.data.permission
-            
-                if(this.permission = "0") { 
+                console.log("permission ")
+                console.log(this.permission)
+                if(this.permission == "0") { 
                     this.accountType = "user"}
                 else{
                     this.accountType = "admin"
