@@ -107,13 +107,14 @@ const UserPage = (props) => {
         <p>Name:{info.name}</p>
         <p>Address: {info.address} {info.town} {info.province}</p>
         <p>Contact: {info.contact}</p>
-        <p>Birthday: Tristan John Girao</p>
-        {/*Change this to `Welcome : ${data.fullname}`*/}
+        <p>Birthday: {info.birthday}</p>
+        {/*Change this to `Welcome : ${data.fullname}`*/} 
         
         <p>Here's your QR CODE</p>
       </div>
-      <img src="" alt="QR Code Here" className="qr-code" />
-      <button type="button" className="resetqr-btn">
+      <div  className="qr-code" dangerouslySetInnerHTML={{ __html: info.qr}}/>
+      
+      <button type="button" className="resetqr-btn" onClick = {handleReset}>
         Reset QR
       </button>
     </div>
