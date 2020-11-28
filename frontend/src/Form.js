@@ -87,6 +87,8 @@ function Form(props) {
     e.preventDefault()
     auth.email = myInfo.clientEmail
     auth.password = myInfo.clientPassword
+    console.log("myInfo.clientPassword")
+    console.log(myInfo.clientPassword)
     
     if(accType.currentAccName == "User")  
       auth.accountType = "user"

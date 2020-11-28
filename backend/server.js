@@ -78,12 +78,19 @@ app.get("/refreshToken",async(req, res)=>{
               let resultToken = await dboperations.checkTokens(refreshToken)
               if(resultToken){
                   let client_id = resultToken.client_id
+                  var permission = null
+                  let dataPermission = await dboperations.getPermission(client_id)
+                    if(dataPermission){
+                        permission = dataPermission.permission
+                    }
+
+
                   const accessToken = generateAccessToken({client_id:client_id})
                   console.log("id")
                   res.cookie('accessToken', accessToken, 
                   {httpOnly: true, withCredentials: true, credentials: 'include',  expires: new Date(Date.now() + 8 * 3600000)});  
                   console.log("id2")
-                  res.send({ client_id: client_id})
+                  res.send({ client_id: client_id, permission:permission})
                   console.log("id3")
               }
               else{

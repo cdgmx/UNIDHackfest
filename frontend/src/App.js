@@ -1,22 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import './Form.css';
 import Form from "./Form"
-import AdminMain2 from './Components/MainPage/AdminMain';
-
-
 import AdminPage from './Components/AdminPage';
 import UserPage from './Components/UserPage';
 import LoginPage from './Components/LoginPage';
-
-import UserMain from './Components/MainPage/UserMain';
 import LandingPage from './Components/MainPage/LandingPage';
 import ProtectedRoute from './ProtectedRoute'
 import {BrowserRouter,Route, Switch, Link} from 'react-router-dom'
-import Axios from 'axios';
 
-import Auth from './auth'
-
-import Loader from './Loader'
 
 
 

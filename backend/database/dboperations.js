@@ -3,6 +3,7 @@ const mysql = require('mysql2/promise');
 var QRCode = require('qrcode');
 var dateFormat = require('dateformat');
 const { v4: uuidv4 } = require('uuid')
+const bcrypt = require('bcrypt');
 
 //-------Legends-------------
 // user - the one being scanned
@@ -46,6 +47,43 @@ async function getClientInfo(client,key,value){
         }   
 }
 
+async function verifyClient(client,email,password){
+    try{
+        // let client ="users"
+        // let client_id = "qwerqwe"
+        console.log(password)
+        console.log(email)
+        if(!client || !email || !password) throw "one of paramenters is null getClientInfo"
+        const sqlSelect = `SELECT * FROM ${client} WHERE email = ?` 
+        const [rows, fields] = await db.execute(sqlSelect, [email])
+        if(rows) {
+            results = parseData(rows[0])
+            if(client != "admins") results.qr = await QRCode.toString(results.qrkey,{type:'svg'})
+
+            
+            let verify = await bcrypt.compare(password, results.password)
+            if(verify){
+                return results
+            }
+            else return null
+            
+            //generating the qr code from the qrkey results given only for users
+        
+            
+         
+            //console.log(results)
+        }
+        else{
+            return null
+        }
+    }
+    catch (error){
+        console.log(error)
+        return null
+    }   
+}
+
+
 async function postClientInfo(client, values){
     try{
         if(!client || !values) throw "one of paramenters is null postClientInfo"
@@ -58,6 +96,10 @@ async function postClientInfo(client, values){
         //generate Unique ID for qr and client_id
         var client_id = uuidv4()
         var qrkey = uuidv4()
+        const saltRounds = 10;
+
+        let newpass = await bcrypt.hash(password, saltRounds)
+
 
         if(client == "user"){
 
@@ -69,7 +111,7 @@ async function postClientInfo(client, values){
             (client_id,permission)
             VALUES (?,?)`
 
-            response = await db.execute(sqlInsert,[email,name,address,town,province,contact,birthday,password,client_id,qrkey])
+            response = await db.execute(sqlInsert,[email,name,address,town,province,contact,birthday,newpass,client_id,qrkey])
             response2 = await db.execute(sqlInsert2,[client_id,'0'])
         }
         else{
@@ -81,7 +123,7 @@ async function postClientInfo(client, values){
             (client_id,permission)
             VALUES (?,?)`
 
-            response = await db.execute(sqlInsert,[email,name,address,town,province,contact,password])
+            response = await db.execute(sqlInsert,[email,name,address,town,province,contact,newpass])
             response2 = await db.execute(sqlInsert2,[client_id,'1'])
         }
 
@@ -122,7 +164,6 @@ async function checkTokens(token){
     try{
         
         if(!token) throw "one of paramenters is null"
-
         const sqlSelect = `SELECT * FROM tokens WHERE token = ?` 
         const [rows, fields] = await db.execute(sqlSelect, [token])
         if(!rows.length == 0) {
@@ -224,11 +265,14 @@ async function getScanned(client_id,key,info_id,client){ //per admin
         //proxy for testing
         // client_id = "zcasf"
         // key = "admin_id"
-        // info_id ="user_id"
-
+        // info_id ="user_id"\
+        console.log("getScanned")
+        console.log(key)
+        console.log(client_id)
         if(!client || !key|| !client_id ||  !info_id ) throw "one of paramenters is null putClientInfo"
         const sqlSelect = `SELECT * FROM scanned WHERE ${key} = ?` 
         const [rows, fields] = await  db.execute(sqlSelect, [client_id])
+
         if(!rows.length == 0) {
             preresults = parseData(rows)
 
@@ -243,11 +287,12 @@ async function getScanned(client_id,key,info_id,client){ //per admin
                     preresults[index].contact = dataGetClientInfo.contact
                 }
                 else{
-                    console.log("dataGetClientInfo")
+                    
                 }
                 return preresults[index]
               }))
 
+              console.log(x)
               if(x) return x
               else throw "Error in promise"
             //   rows[0].user_id = {"test":1}
@@ -317,7 +362,8 @@ module.exports = {
     getScanned:getScanned,
     deleteTokens:deleteTokens,
     postClientInfo:postClientInfo,
-    putClientInfo:putClientInfo
+    putClientInfo:putClientInfo,
+    verifyClient:verifyClient
 }
 
 

@@ -53,7 +53,7 @@ router
             if(accountType == 'user') client = "users"
             else client = "admins"
 
-            let dataGetClientInfo = await dboperations.getClientInfo(client,'email', email)
+            let dataGetClientInfo = await dboperations.verifyClient(client,email,password)
             if(dataGetClientInfo){
                 const client_id = dataGetClientInfo.client_id
                 const accessToken = generateAccessToken({client_id:client_id})
