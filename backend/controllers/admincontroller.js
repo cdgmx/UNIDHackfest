@@ -1,16 +1,14 @@
 const express = require('express')
-const dboperations = require ('../database/dboperations')
 let router = express.Router()
-//future purposes, not being used
 
-var client = "users"
-var client_id = "qwerqwe"
-// var qrkey = "135"
-var QRCode = require('qrcode');
+//custom module
+const dboperations = require ('../database/dboperations')
 const authToken = require ('../authentication/authToken')
+//
 router.use(authToken)
- //for gettin and updating
- 
+
+
+//for client info
 router
     .route('/info')
     .get(async (req,res) =>{
@@ -31,12 +29,14 @@ router
             res.status(401).send(error);
         }
     })
+
+//for scanned data
 router
     .route('/scanned')
     .get(async (req,res) =>{
         try{
             //needed client_id, it will select all data from  scanned table where admin_id = client_id
-            //it will only get its own scanned data
+            //it will only collect its own scanned data
             let client_id = req.client_id
             console.log(client_id)
             let data = await dboperations.getScanned(client_id,'admin_id','user_id','users')
@@ -60,6 +60,7 @@ router
             if(!req.body) throw "no data in body"
             let admin_id =  req.client_id
             let qrkey = req.body.qrkey
+            //find the user with matching qrkey
             let response = await dboperations.getClientInfo("users",'qrkey',qrkey)
             if(response){
                 let user_id =  response.client_id

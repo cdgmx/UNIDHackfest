@@ -38,7 +38,6 @@ const UserPage = (props) => {
         props.history.push("/form")
     }
     
-
     // const items = [{}]
     const handleHistory = async() =>{
         const isAuth = await auth.isAuthenticated()
@@ -98,6 +97,7 @@ const UserPage = (props) => {
             setData()
       },[history]);
 
+      
   /////
   return (
     <div className="userpage-div">

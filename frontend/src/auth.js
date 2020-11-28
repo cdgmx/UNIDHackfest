@@ -13,7 +13,7 @@ class Auth{
         }
         this.accountType = null //available after login either admin or admin
         this.client_id = null
-        this.message = null
+        this.responseMessage = null
         this.scannedData = null
         this.scanDetail = null
         this.regInfo = null
@@ -22,13 +22,14 @@ class Auth{
         
         Axios.defaults.withCredentials = true;
     }
-    async regClient(cb){
+    async signUp(cb){
         try{
             console.log("Try")
-            let response = await Axios.post('http://localhost:3001/register',  {regInfo: this.regInfo},
-            {withCredentials: true,
-            })
-            console.log("Received Scan Response") 
+            let response = await Axios.post('http://localhost:3001/form/signUp', {
+                regInfo: this.regInfo,
+                accountType:this.accountType})
+
+            console.log("Success Sign Up") 
             this.message = response.data.message
         }
         catch(error){
@@ -37,6 +38,28 @@ class Auth{
         }   
 
         cb()
+    }
+
+
+    async signIn(cb) {
+        try{
+            let response = await Axios.post('http://localhost:3001/form/signIn',{
+            email:this.email,
+            // password: this.password,
+            password: "123",
+            accountType:this.accountType
+            })
+            console.log("Login")
+            console.log(this.accountType)
+            this.info = response.data.info
+            this.authenticated = true
+
+            cb()
+        }
+        catch(error){
+            console.log("ERROR: " +  error)
+        }
+        
     }
 
     async getScanData(cb){
@@ -68,25 +91,7 @@ class Auth{
 
     }
 
-    async signIn(cb) {
-        try{
-            let response = await Axios.post('http://localhost:3001/form/signIn',{
-            email:this.email,
-            // password: this.password,
-            password: "123",
-            accountType:this.accountType
-            })
-
-            this.info = response.data.info
-            this.authenticated = true
-
-            cb()
-        }
-        catch(error){
-            console.log("ERROR: " +  error)
-        }
-        
-    }
+    
 
     async resetqr(cb){
         try{
@@ -133,16 +138,17 @@ class Auth{
             let response = await Axios.post('http://localhost:3001/admin/scanned',  {qrkey: this.qrkey},
             {withCredentials: true,
             })
+
             console.log("Received Scan Response") 
+
             this.scanDetail = response.data 
-            this.message = "success"
+            this.responseMessage = "Scanning Success"
                    
         }
         catch(error){
-            
             console.log("ERROR: " +  error.response.data)
-            this.message = error.response.data
-            console.log( this.error)
+            this.responseMessage = error.response.data
+            
         }   
 
         cb()

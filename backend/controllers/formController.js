@@ -49,6 +49,10 @@ router
             const email = req.body.email
             const password = req.body.password
             const accountType = req.body.accountType
+
+            console.log('accounts')
+            console.log(req.body)
+
             var client = null
             
             if(accountType == 'user') client = "users"

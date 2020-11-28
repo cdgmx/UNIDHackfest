@@ -16,71 +16,74 @@ class Scanner extends Component {
   constructor(props){
     super(props)
     this.state = {
-      delay: 500,
+      delay: 1500,
       name: "",
       status:"None",
       result: 'No result',
       
     }
-
-
     this.handleScan = this.handleScan.bind(this)
+    this.submitScan = this.submitScan.bind(this)
+    this.handleTimeOut = this.handleTimeOut.bind(this)
   }
   handleScan(result){
     if(result){
       this.setState({ result })
+      this.submitScan()
     }
   }
+  handleTimeOut(){
+    this.setState({status:"Waiting for Result",name: null, result: ""})
+  }
+
   handleError(err){
     console.error(err)
   }
+
+  submitScan = async() => {
+    try{
+      const isAuth = await auth.isAuthenticated()
+      console.log("auth Done")
+      if(isAuth){
+        auth.qrkey = this.state.result
+        await auth.postScanData(()=>{
+          console.log("Submitted")
+          setTimeout(this.handleTimeOut, 2000)
+          
+        })
+        
+      }
+    this.setState({status: auth.responseMessage})
+    this.setState({name: auth.scanDetail.name})
+    
+    }
+    catch(error){
+      this.setState({status: auth.responseMessage})
+    } 
+  }
+
+ 
+
   render(){
     const previewStyle = {
       height: 240,
       width: 320,
     }
-
-
-    
-
-    const submitScan = async() => {
-      try{
-        const isAuth = await auth.isAuthenticated()
-        console.log("auth Done")
-        if(isAuth){
-          auth.qrkey = this.state.result
-          console.log(this.state.result)
-          console.log( auth.qrkey)
-          await auth.postScanData(()=>{
-            console.log("Submitted")
-           
-           
-    
-
-          })
-        }
-      this.setState({status: auth.message})
-      }
-      catch(error){
-        this.setState({status: auth.message})
-      }
-
-    }
-    
+  
     return(
       <div>
-      
-
+    
         <QrReader
         delay={this.state.delay}
         style={previewStyle}
         onError={this.handleError}
         onScan={this.handleScan}
-  />        <button onClick = {submitScan}>Submit Scan here</button>
+  />        
 
+{/* <button onClick = {this.submitScan}>Submit Scan here</button> */}
         <p>Name: {this.props.storename}</p>
 
-        <p>{this.state.result}</p>
+        <p>Result:{this.state.result}</p>
 
         <p>Status: {this.state.status}</p>
 

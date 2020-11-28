@@ -1,5 +1,6 @@
 const express = require('express')
 const dboperations = require ('../database/dboperations')
+const { v4: uuidv4 } = require('uuid')
 
 
 
@@ -13,6 +14,7 @@ var client = "users"
 var client_id = "qwerqwe"
 // var qrkey = "135"
 var QRCode = require('qrcode');
+
 const authToken = require ('../authentication/authToken')
 router.use(authToken)
 
@@ -43,7 +45,7 @@ router //for gettin and updating
             try{
                 //updating the qrkey to resetqr
                 //needed the new qrkey
-                let qrkey = Math.floor((Math.random() * 1000) + 1); //convert to hash
+                var qrkey = uuidv4() //convert to hash
                 let client_id = req.client_id
                 console.log(qrkey)
                 console.log(client_id)

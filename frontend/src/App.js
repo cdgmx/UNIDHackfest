@@ -6,7 +6,7 @@ import AdminMain2 from './Components/MainPage/AdminMain';
 
 import AdminPage from './Components/AdminPage';
 import UserPage from './Components/UserPage';
-
+import LoginPage from './Components/LoginPage';
 
 import UserMain from './Components/MainPage/UserMain';
 import LandingPage from './Components/MainPage/LandingPage';
@@ -26,20 +26,18 @@ function App() {
     var refresh
  
     
-        
 
     return (
         <div>
                 <Switch>
                     <Route exact  path ="/" component ={LandingPage} />
-                    <ProtectedRoute isForm = {true} exact path ="/form" component ={Form}/> 
-                    <ProtectedRoute isForm = {false} exact path ="/user" component ={UserPage}/>
-                    <ProtectedRoute  isForm = {false}  exact path ="/admin" component ={AdminPage}/> 
+                    <ProtectedRoute currentPath = "form" exact path ="/form" component ={Form}/> 
+                    <ProtectedRoute currentPath = "user" exact path ="/user" component ={UserPage}/>
+                    <ProtectedRoute  currentPath = "admin"  exact path ="/admin" component ={AdminPage}/> 
+                    <ProtectedRoute  currentPath = "form" exact path ="/login" component ={LoginPage}/> 
+                
                     <Route path ="*" component ={() => "404 not found hehe"} />
                 </Switch>
-            
-                
-
         </div>
     )   
 }

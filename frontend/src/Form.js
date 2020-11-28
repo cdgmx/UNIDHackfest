@@ -95,7 +95,7 @@ function Form(props) {
   
     auth.signIn(() => { 
       console.log("push")
-      props.history.push("/admin")
+      props.history.push("/")
     })
     setHasAccount(true) 
   }
@@ -179,44 +179,27 @@ function Form(props) {
 
 
   const handleRegister = (e) => {
-  
-    // console.log("has errer " + isFormError.hasError + isFormError.hasError 
-    // +isFormError.email
-    // +isFormError.password
-    // +isFormError.contact
-    // )
+
     if(!isFormError.hasError)
     {
       auth.regInfo = myInfo
-      if (adminAcc == false){
-       
-        auth.regClient(()=>{
-          props.history.push("/user")
-        })
-      
+      if(accType.currentAccName == "User")  
+      auth.accountType = "user"
+      else 
+      auth.accountType = "admin"
+
+      auth.signUp(()=>{
+         
+      })
       alert("Registeration Submitted")
       //changeSign()
       e.preventDefault()
       e.target.reset()
       //reset date
       changeSign()
-       
-      }
-      else{
-        auth.regClient(()=>{
-        props.history.push("/user")
-        })
-      alert("Registeration Submitted")
-      //changeSign()
-      }
-    }
-    else{
-      e.preventDefault()
-      alert("Error")
-    }
-    
-  };
 
+    }
+  }
   const changeSign = () => {
     
     

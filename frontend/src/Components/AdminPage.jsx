@@ -41,7 +41,10 @@ const AdminPage = () => {
   };
 
   const adminLogoutHandler = () => {
-    window.location.href = "/";
+
+    auth.logout(()=>{
+      window.location.href = "/";
+    })
   };
 
 
@@ -111,6 +114,7 @@ const AdminPage = () => {
           >
             Admin Profile
           </button>
+          
           <button
             type="button"
             className="topnav-btn"

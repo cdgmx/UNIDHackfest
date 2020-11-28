@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import "./Styles/LandingPage.css";
 // import Axios from "axios";
+import auth from '../auth'
 
 const LoginPage = () => {
   const [check, setCheck] = useState(false);
-
-  // const client = "";
-  // const key = "";
-  // const value = "";
 
   const handleCheck = () => {
     if (check === false) {
@@ -17,30 +14,31 @@ const LoginPage = () => {
     }
   };
 
-  // const loginHandler = () => {
-  //   //login button handler
-  //   if (check === false) {
-  //     //if in user mode
-  //   //   client = "users";
-  //   //   key = "username";
-  //   //   value = document.getElementById("usernameInput").textContent;
-  //   // } else {
-  //   //   //if in admin mode
-  //   //   client = "admins";
-  //   //   key = "username";
-  //   //   value = document.getElementById("usernameInput").textContent;
-  //   // }
-  //   // Axios.post("http://localhost:3001/api/logindata", {
-  //   //   client: client,
-  //   //   key: key,
-  //   //   value: value,
-  //   });
-  // };
-  const gotoAdmin = () => {
-    check === false
-      ? (window.location.href = "/userpage")
-      : (window.location.href = "/adminpage");
+  const loginHandler = (props) => {
+    //login button handler
+    if (check === false) {
+      //if in user mode
+      auth.accountType = "user";
+      auth.email = document.getElementById("usernameInput").value;
+   
+    } else {
+      //if in admin mode
+      auth.accountType = "admin";
+      auth.email = document.getElementById("usernameInput").value;
+     
+    }
+    auth.signIn(() => { 
+      console.log("push")
+      window.location.href = "/"
+    })
+
   };
+
+  // const gotoAdmin = () => {
+  //   check === false
+  //     ? (window.location.href = "/userpage")
+  //     : (window.location.href = "/adminpage");
+  // };
   return (
     <form className="landingpage-form">
       <label className="switch">
@@ -49,12 +47,12 @@ const LoginPage = () => {
       </label>
       {check === false ? (
         <p className="clientType">Logging In as User</p>
-      ) : (
+      ) :(
         <p className="clientType">Logging In as Admin</p>
       )}
 
       <label className="username-label login-label" htmlFor="username">
-        Username
+        Email
       </label>
       <input
         className="username-input login-input"
@@ -73,7 +71,7 @@ const LoginPage = () => {
         name="password"
       />
 
-      <button className="login-btn" type="button" onClick={gotoAdmin}>
+      <button className="login-btn" type="button" onClick={loginHandler}>
         Login
       </button>
       <p className="gotosignup">
