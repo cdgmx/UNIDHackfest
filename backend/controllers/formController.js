@@ -9,7 +9,7 @@ var client = "users"
 var client_id = "qwerqwe"
 // var qrkey = "135"
 var QRCode = require('qrcode');
-const e = require('express')
+
 
 router
     .route('/signUp')
@@ -46,9 +46,12 @@ router
     .route('/signIn')
     .post(async (req,res) =>{
         try{
-            const [email, password,accountType] = req.body
+            const email = req.body.email
+            const password = req.body.password
+            const accountType = req.body.accountType
             var client = null
-            if(accountType == "User") client = "users"
+            
+            if(accountType == 'user') client = "users"
             else client = "admins"
 
             let dataGetClientInfo = await dboperations.getClientInfo(client,'email', email)
@@ -56,6 +59,7 @@ router
                 const client_id = dataGetClientInfo.client_id
                 const accessToken = generateAccessToken({client_id:client_id})
                 const refreshToken = jwt.sign(client_id,process.env.REFRESH_TOKEN_SECRET)
+                
                 let dataUpdateTokens = await dboperations.updateTokens(refreshToken, client_id)
                     if(dataUpdateTokens){
                         res.cookie('refreshToken', refreshToken, 
@@ -65,11 +69,11 @@ router
                         res.send({info:dataUpdateTokens})
                     }
                     else{
-                        throw "Error updating token in DB"
+                        throw "Error updating  refreshToken token in DB"
                     }      
             }
             else{
-                throw "no data received"
+                throw "no data received in getClientInfo"
             }
         
         }
@@ -79,5 +83,8 @@ router
         }
     })
 
-   
+function generateAccessToken(user){
+    var token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '5s'})
+    return token
+}
 module.exports = router

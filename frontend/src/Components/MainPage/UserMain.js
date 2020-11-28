@@ -34,8 +34,7 @@ import { Chrono } from "react-chrono";
         console.log("auth Done")
         console.log(isAuth)
         if(isAuth){
-        await auth.getScanData(()=>{
-           
+        await auth.getHistory(()=>{
             setHistory(auth.scannedData)
             setLoading(true)
         })
@@ -51,15 +50,13 @@ import { Chrono } from "react-chrono";
             console.log("resetqr")
             setQR(auth.info.qr)
         })}
-        
-       
+          
     }
 
 
     useEffect(() => {
         async function info (){
-           await auth.getInfo(()=>{
-                
+           await auth.getInfo(()=>{   
             })
             
             setInfo(auth.info)
@@ -75,14 +72,16 @@ import { Chrono } from "react-chrono";
                 return;
             }
             async function setData(){
-            let preItems = [{}]
-            let historyData = await Promise.all(Object.keys(history).map(function(key,index){
-                preItems.title =   `${history[index].date} ${history[index].time}${history[index].period}`
-                preItems.cardTitle = history[index].name
-                preItems.cardSubtitle = history[index].address
-                return preItems
-            }))
-
+            let preItems = []
+            
+            let historyData =  history.map(function(key,index){
+                return{
+                    title :  `${history[index].date} ${history[index].time}${history[index].period}`,
+                    cardTitle :`${history[index].name} ` ,
+                    cardSubtitle : `${history[index].name}`
+                }
+            })
+            console.log(historyData)
             setItems(historyData)
             setHistoryLoad(true)
             }
@@ -111,8 +110,8 @@ import { Chrono } from "react-chrono";
             <button onClick = {handleAdmin}>Admin</button>    
             <button onClick = {handleForm}>Form</button>  
             <button onClick = {handleReset}>Reset QR</button>  
-            <div style={{width: "500px", height: "200px" }}>
-            { historyLoad ? ( <Chrono items={items}  mode="VERTICAL"  hideControls cardHeight = {3}/> ) : 
+            <div style={{width: "500px", height: "500px" }}>
+            { historyLoad ? ( <Chrono items={items}  mode="VERTICAL"  hideControls cardHeight = {300}/> ) : 
             <> </>  //load only when historyLoad is true
             } 
             </div>

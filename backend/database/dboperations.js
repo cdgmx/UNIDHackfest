@@ -79,7 +79,7 @@ async function postClientInfo(client, values){
 
 async function putClientInfo(client, column,value, key,client_id){
     try{
-        if(!client || !column|| !value|| !key|| !client_id) throw "one of paramenters is null "
+        if(!client || !column|| !value|| !key|| !client_id) throw "one of paramenters is null putClientInfo"
         //client DB{users, admins} column{address, name, bday} key ={thing you want to match}
         const sqlUpdate = `UPDATE ${client} SET ${column} = ? WHERE ${key} = ?` 
         const response = await db.execute(sqlUpdate, [value,client_id])
@@ -122,9 +122,12 @@ async function checkTokens(token){
 async function updateTokens(token, client_id){
     try{
         if( !client_id || !token) throw "one of paramenters is null "
+
         const sqlInsert = `INSERT INTO tokens (token, client_id) VALUES(?,?)` 
-        db.execute(sqlInsert, [token,client_id])
-        return true
+        let data = await db.execute(sqlInsert, [token,client_id])
+        if(data)return true
+        else throw "problem updateTokens"
+        
         //console.log(results)
     }
     catch (error){
@@ -205,7 +208,7 @@ async function getScanned(client_id,key,info_id,client){ //per admin
         // key = "admin_id"
         // info_id ="user_id"
 
-
+        if(!client || !key|| !client_id ||  !info_id ) throw "one of paramenters is null putClientInfo"
         const sqlSelect = `SELECT * FROM scanned WHERE ${key} = ?` 
         const [rows, fields] = await  db.execute(sqlSelect, [client_id])
         if(!rows.length == 0) {
@@ -244,6 +247,7 @@ async function getScanned(client_id,key,info_id,client){ //per admin
 
 async function getPermission(client_id){ //per admin
     try{
+        if(!client_id) throw "null getPermission param"
         const sqlSelect = `SELECT * FROM clients WHERE client_id = ?` 
         const [rows, fields] = await  db.execute(sqlSelect, [client_id])
         if(!rows.length == 0) {

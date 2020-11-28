@@ -7,15 +7,16 @@ var client = "users"
 var client_id = "qwerqwe"
 // var qrkey = "135"
 var QRCode = require('qrcode');
-
-router //for gettin and updating
+const authToken = require ('../authentication/authToken')
+router.use(authToken)
+ //for gettin and updating
  
 router
     .route('/info')
     .get(async (req,res) =>{
         try{
             //needed client_id of admin
-            let client_id = req.body.client_id
+            let client_id = req.client_id
             let data = await dboperations.getClientInfo("admins",'client_id',client_id)
             if(data){
                 res.send(data)
@@ -36,10 +37,10 @@ router
         try{
             //needed client_id, it will select all data from  scanned table where admin_id = client_id
             //it will only get its own scanned data
-            let client_id = req.body.client_id
+            let client_id = req.client_id
+            console.log(client_id)
             let data = await dboperations.getScanned(client_id,'admin_id','user_id','users')
             if(data){
-                console.log("history sent")
                 res.send(data)
             }
             else{
@@ -57,14 +58,14 @@ router
             //it will only get its own scanned data
             console.log(req.body)
             if(!req.body) throw "no data in body"
-            let admin_id =  req.body.client_id
+            let admin_id =  req.client_id
             let qrkey = req.body.qrkey
             let response = await dboperations.getClientInfo("users",'qrkey',qrkey)
             if(response){
                 let user_id =  response.client_id
                 let data = await dboperations.postScanned(admin_id, user_id)
                 if(data){
-                    res.send("success")
+                    res.send(response)
                 }
                 else{
                     throw "error in postScanned"

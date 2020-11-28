@@ -43,10 +43,20 @@ const AdminMain = (props) => {
         }
      
     }
+  
+     
+
 
     useEffect(()=>{
-
+        async function info (){
+            await auth.getInfoAdmin(()=>{   
+                console.log("auth.info.name")
+                console.log(auth.info)
+             })
+            }
+            info()
         handleGetScan()
+        console.log("admin effect")
 
     },[])
 
@@ -64,9 +74,7 @@ const AdminMain = (props) => {
             <h3>admin</h3>
             
             <Scan
-
-            storename = {auth.storename}
-
+            storename = {auth.info.name}
             />
             <button 
             onClick = { () => {

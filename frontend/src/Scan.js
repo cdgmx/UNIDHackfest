@@ -48,8 +48,15 @@ class Scanner extends Component {
         const isAuth = await auth.isAuthenticated()
         console.log("auth Done")
         if(isAuth){
-          await auth.submitScan(()=>{
+          auth.qrkey = this.state.result
+          console.log(this.state.result)
+          console.log( auth.qrkey)
+          await auth.postScanData(()=>{
             console.log("Submitted")
+           
+           
+    
+
           })
         }
       this.setState({status: auth.message})
@@ -58,14 +65,6 @@ class Scanner extends Component {
         this.setState({status: auth.message})
       }
 
-      // this.setState({result: "No result"});
-      // Axios.post('http://localhost:3005/scan',  {qrkey: this.state.result
-      // }).then((res) =>{
-      //     if(res.status == 200){this.setState({status: "sucess"});}
-      //     else this.setState({status: "failed"});
-      // }).catch(function (error) {
-      //     console.log(JSON.stringify(error))
-      // });
     }
     
 
@@ -82,7 +81,7 @@ class Scanner extends Component {
         onScan={this.handleScan}
   />        <button onClick = {submitScan}>Submit Scan here</button>
 
-        <p>Storename: {this.props.storename}</p>
+        <p>Name: {this.props.storename}</p>
 
         <p>{this.state.result}</p>
 
