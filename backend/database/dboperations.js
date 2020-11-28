@@ -2,6 +2,7 @@ const config = require ('./dbconfig');
 const mysql = require('mysql2/promise');
 var QRCode = require('qrcode');
 var dateFormat = require('dateformat');
+const { v4: uuidv4 } = require('uuid')
 
 //-------Legends-------------
 // user - the one being scanned
@@ -24,9 +25,7 @@ async function getClientInfo(client,key,value){
         try{
             // let client ="users"
             // let client_id = "qwerqwe"
-
-            if(!client || !key || !value) throw "one of paramenters is null"
-
+            if(!client || !key || !value) throw "one of paramenters is null getClientInfo"
             const sqlSelect = `SELECT * FROM ${client} WHERE ${key} = ?` 
             const [rows, fields] = await db.execute(sqlSelect, [value])
             if(!rows.length == 0) {
@@ -49,22 +48,44 @@ async function getClientInfo(client,key,value){
 
 async function postClientInfo(client, values){
     try{
-        if(!client || !values) throw "one of paramenters is null"
+        if(!client || !values) throw "one of paramenters is null postClientInfo"
         var response = null
         var sqlInsert = null
+        var response2 = null
+        var sqlInsert2 = null
+        
         const {email,name,address,town,province,contact,birthday,password} = values
-        console.log(values)
-        if(client == "user"){sqlInsert= `INSERT INTO users
-        (email,name,address,town,province,contact,birthday,password)
-        VALUES (?,?,?,?,?,?,?,?)`
-        response = await db.execute(sqlInsert,[email,name,address,town,province,contact,birthday,password])
+        //generate Unique ID for qr and client_id
+        var client_id = uuidv4()
+        var qrkey = uuidv4()
+
+        if(client == "user"){
+
+            sqlInsert= `INSERT INTO users
+            (email,name,address,town,province,contact,birthday,password,client_id,qrkey)
+            VALUES (?,?,?,?,?,?,?,?,?,?)`
+
+            sqlInsert2= `INSERT INTO clients
+            (client_id,permission)
+            VALUES (?,?)`
+
+            response = await db.execute(sqlInsert,[email,name,address,town,province,contact,birthday,password,client_id,qrkey])
+            response2 = await db.execute(sqlInsert2,[client_id,'0'])
         }
-        else{sqlInsert = `INSERT INTO admins 
-        (email,name,address,town,province,contact,password)
-        VALUES (?,?,?,?,?,?,?)`
-        response = await db.execute(sqlInsert,[email,name,address,town,province,contact,password])
+        else{
+            sqlInsert = `INSERT INTO admins 
+            (email,name,address,town,province,contact,password)
+            VALUES (?,?,?,?,?,?,?)`
+
+            sqlInsert2 = `INSERT INTO clients
+            (client_id,permission)
+            VALUES (?,?)`
+
+            response = await db.execute(sqlInsert,[email,name,address,town,province,contact,password])
+            response2 = await db.execute(sqlInsert2,[client_id,'1'])
         }
-        if (response){
+
+        if (response && response2){
             return true
         }
         else{
@@ -79,7 +100,7 @@ async function postClientInfo(client, values){
 
 async function putClientInfo(client, column,value, key,client_id){
     try{
-        if(!client || !column|| !value|| !key|| !client_id) throw "one of paramenters is null "
+        if(!client || !column|| !value|| !key|| !client_id) throw "one of paramenters is null putClientInfo"
         //client DB{users, admins} column{address, name, bday} key ={thing you want to match}
         const sqlUpdate = `UPDATE ${client} SET ${column} = ? WHERE ${key} = ?` 
         const response = await db.execute(sqlUpdate, [value,client_id])
@@ -107,7 +128,7 @@ async function checkTokens(token){
         if(!rows.length == 0) {
             results = parseData(rows[0])
             return results
-            //console.log(results)
+            
         }
         else{
             return null
@@ -122,10 +143,13 @@ async function checkTokens(token){
 async function updateTokens(token, client_id){
     try{
         if( !client_id || !token) throw "one of paramenters is null "
+
         const sqlInsert = `INSERT INTO tokens (token, client_id) VALUES(?,?)` 
-        db.execute(sqlInsert, [token,client_id])
-        return true
-        //console.log(results)
+        let data = await db.execute(sqlInsert, [token,client_id])
+        if(data)return true
+        else throw "problem updateTokens"
+        
+       
     }
     catch (error){
         console.log(error)
@@ -141,7 +165,7 @@ async function deleteTokens(token){
         let response = await db.execute(sqlDelete, [token])
         if(response){
             return true
-            //console.log(results)
+            
         }
         else{
             throw "problem ind delete"
@@ -155,10 +179,10 @@ async function deleteTokens(token){
 }
 
 
-async function postScanInfo(admin_id,user_id){
+async function postScanned(admin_id,user_id){
     try{
-        
         //creating the dates
+        console.log(admin_id,user_id)
         var now = new Date();
         var day = dateFormat(now,"d")
         var month = dateFormat(now,"m")
@@ -167,8 +191,7 @@ async function postScanInfo(admin_id,user_id){
         var period = dateFormat(now, "TT")
         var date = dateFormat(now, "yyyy-mm-dd")
         
-        // let client ="users"
-        // let client_id = "qwerqwe"
+        
         const sqlInsert = `INSERT INTO scanned(   
             admin_id,
             user_id, 
@@ -182,13 +205,11 @@ async function postScanInfo(admin_id,user_id){
 
         const [rows, fields] = await db.execute(sqlInsert, [admin_id, user_id, day,month,year,time,period,date])
         if(rows) {
-            // console.log('success')
+            
             return rows
         }
         else{
-            // console.log("error here")
-            // console.log(rows)
-            // console.log(fields)
+            
             return null
         }
     }
@@ -205,7 +226,7 @@ async function getScanned(client_id,key,info_id,client){ //per admin
         // key = "admin_id"
         // info_id ="user_id"
 
-
+        if(!client || !key|| !client_id ||  !info_id ) throw "one of paramenters is null putClientInfo"
         const sqlSelect = `SELECT * FROM scanned WHERE ${key} = ?` 
         const [rows, fields] = await  db.execute(sqlSelect, [client_id])
         if(!rows.length == 0) {
@@ -220,7 +241,6 @@ async function getScanned(client_id,key,info_id,client){ //per admin
                     preresults[index].town = dataGetClientInfo.town
                     preresults[index].province = dataGetClientInfo.province
                     preresults[index].contact = dataGetClientInfo.contact
-
                 }
                 else{
                     console.log("dataGetClientInfo")
@@ -245,7 +265,8 @@ async function getScanned(client_id,key,info_id,client){ //per admin
 
 async function getPermission(client_id){ //per admin
     try{
-        const sqlSelect = `SELECT * FROM clients WHERE client_id = ?` 
+        if(!client_id) throw "null getPermission param"
+        const sqlSelect = `SELECT * FROM clients WHERE client_id = ?`
         const [rows, fields] = await  db.execute(sqlSelect, [client_id])
         if(!rows.length == 0) {
             results = parseData(rows[0])
@@ -291,7 +312,7 @@ module.exports = {
     getClientInfo: getClientInfo,
     checkTokens: checkTokens,
     updateTokens:updateTokens,
-    postScanInfo:postScanInfo,
+    postScanned:postScanned,
     getPermission:getPermission,
     getScanned:getScanned,
     deleteTokens:deleteTokens,

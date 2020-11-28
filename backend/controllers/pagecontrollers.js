@@ -2,16 +2,21 @@ require("dotenv").config();
 
 const express = require("express");
 const router = express.Router();
-
 const mysql = require("mysql");
+const jwt = require ("jsonwebtoken")
+
+const authToken = require ('../authentication/authToken')
 
 
-router.get("/api/get", (req, res) => {
-  const sqlSELECT = "SELECT * FROM user_tbl";
-  db.query(sqlSELECT, (err, result) => {
-    res.send(result);
-  });
-});
+router.post('/authenticate',authToken, (req,res) =>{
+  res.cookie('accessToken', req.accessToken,  //dont need to return fix this
+  { httpOnly: true, withCredentials: true, credentials: 'include',  expires: new Date(Date.now() + 8 * 3600000)});
+  res.send({ client_id: req.client_id, permission:req.permission})
+})
+
+
+
+
 
 router.post("/signuppage/submit", (req, res) => {
   const fname = req.body.fname;

@@ -1,16 +1,17 @@
 const express = require('express')
 const dboperations = require ('../database/dboperations')
-let router = express.Router()
-//future purposes, not being used
+const { v4: uuidv4 } = require('uuid')
+const QRCode = require('qrcode');
+const authToken = require ('../authentication/authToken')
 
-var client = "users"
-var client_id = "qwerqwe"
-// var qrkey = "135"
-var QRCode = require('qrcode');
+
+
+let router = express.Router()
+router.use(authToken)
 
 router //for gettin and updating
     .route('/qr')
-    .get(async (req,res) =>{
+    .post(async (req,res) =>{
         try{
             //needed qrkey
             let qrkey = req.body.qrkey
@@ -28,36 +29,45 @@ router //for gettin and updating
         }
         catch(error) {
             console.log(error)
-            res.status(401).send({message:error});
+            res.status(401).send(error);
         }
     })
-        .put((req,res) =>{
+        .put(async(req,res) =>{
             try{
                 //updating the qrkey to resetqr
                 //needed the new qrkey
-                let qrkey = req.body.qrkey
-                let client_id = req.body.client_id
-                dboperations.putClientInfo('users','qrkey',qrkey,'client_id',client_id)
-                res.send("success") //to be change later
+                var qrkey = uuidv4() //convert to hash
+                let client_id = req.client_id
+                console.log(qrkey)
+                console.log(client_id)
+                
+                await dboperations.putClientInfo('users','qrkey',qrkey,'client_id',client_id)
+
+                let qr = await QRCode.toString(`${qrkey}`,{type:'svg'})
+                res.send(qr) //to be change later
             }
             catch(error) {
                 console.log(error)
-                res.status(401).send({message:error});
+                res.status(401).send(error);
             }
         })
 router
     .route('/info')
     .get(async (req,res) =>{
         try{
+            console.log("user/info")
             //needed client id
-            let client_id = req.body.client_id
+            let client_id =  req.client_id
+            
             let data = await dboperations.getClientInfo("users",'client_id',client_id)
+
             if(data){
+                console.log(data)
                 res.send(data)
             }
             else{
                 console.log("info sent")
-                throw "error in getClientInfo"
+                throw "error in getClientInfo Diretso"
             }
         }
         catch(error) {
@@ -69,7 +79,7 @@ router
     .route('/history')
     .get(async (req,res) =>{
         try{
-            let client_id = req.body.client_id
+            let client_id = req.client_id
             let data = await dboperations.getScanned(client_id,'user_id','admin_id','admins')
             if(data){
                 console.log("history sent")
@@ -81,7 +91,8 @@ router
         }
         catch(error) {
             console.log(error)
-            res.status(401).send({message:error});
+            res.status(401).send(error);
         }
     })
+
 module.exports = router
