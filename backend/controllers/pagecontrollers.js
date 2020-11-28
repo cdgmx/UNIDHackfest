@@ -6,7 +6,7 @@ const mysql = require("mysql");
 const jwt = require ("jsonwebtoken")
 
 const authToken = require ('../authentication/authToken')
-// router.use()
+
 
 router.post('/authenticate',authToken, (req,res) =>{
   res.cookie('accessToken', req.accessToken,  //dont need to return fix this

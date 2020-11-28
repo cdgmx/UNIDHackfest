@@ -1,21 +1,12 @@
 const express = require('express')
 const dboperations = require ('../database/dboperations')
 const { v4: uuidv4 } = require('uuid')
-
-
+const QRCode = require('qrcode');
+const authToken = require ('../authentication/authToken')
 
 
 
 let router = express.Router()
-//future purposes, not being used
-
-
-var client = "users"
-var client_id = "qwerqwe"
-// var qrkey = "135"
-var QRCode = require('qrcode');
-
-const authToken = require ('../authentication/authToken')
 router.use(authToken)
 
 router //for gettin and updating
@@ -38,7 +29,7 @@ router //for gettin and updating
         }
         catch(error) {
             console.log(error)
-            res.status(401).send({message:error});
+            res.status(401).send(error);
         }
     })
         .put(async(req,res) =>{
@@ -57,7 +48,7 @@ router //for gettin and updating
             }
             catch(error) {
                 console.log(error)
-                res.status(401).send({message:error});
+                res.status(401).send(error);
             }
         })
 router
@@ -100,7 +91,7 @@ router
         }
         catch(error) {
             console.log(error)
-            res.status(401).send({message:error});
+            res.status(401).send(error);
         }
     })
 

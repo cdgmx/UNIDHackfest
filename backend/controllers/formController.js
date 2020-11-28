@@ -3,14 +3,7 @@ const dboperations = require ('../database/dboperations')
 let router = express.Router()
 const jwt = require ("jsonwebtoken")
 
-//future purposes, not being used
-
-var client = "users"
-var client_id = "qwerqwe"
-// var qrkey = "135"
-var QRCode = require('qrcode');
-
-
+//signUp route
 router
     .route('/signUp')
     .post(async (req,res) =>{
@@ -42,6 +35,8 @@ router
             res.status(401).send(error);
         }
     })
+
+//signIn route
 router
     .route('/signIn')
     .post(async (req,res) =>{
@@ -87,8 +82,11 @@ router
         }
     })
 
+//access token generation
 function generateAccessToken(user){
     var token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '5s'})
     return token
 }
+
+
 module.exports = router
