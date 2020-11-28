@@ -4,6 +4,7 @@
   left: 0;
   height: 100%;
   width: 100%;
+  background: #f2f2f2;
 }
 .formbox {
   position: relative;
@@ -18,14 +19,16 @@
 }
 .userRegister-title {
   position: relative;
-  height: 10%;
-  width: 100%;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  margin-top: 3%;
+  height: 7%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  border-radius: 5px;
+  background: linear-gradient(145deg, #dadada, #ffffff);
+  box-shadow: 9px 9px 19px #c9c9c9, -9px -9px 19px #ffffff;
 }
 .userRegister-title h1 {
   font-size: 26px;
@@ -33,7 +36,7 @@
 .userinputs-div {
   position: relative;
   width: 98%;
-  height: 70%;
+  height: 75%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,12 +44,18 @@
 }
 .userinput {
   position: relative;
-  height: 35px;
-  width: 50%;
+  height: 40px;
+  width: 70%;
   margin: 5px;
   color: black;
   border: none;
   border-bottom: 1px solid gray;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background: #f2f2f2;
+  box-shadow: inset 4px 4px 8px #c9c9c9, inset -4px -4px 8px #ffffff;
+  padding: 10px;
 }
 .birthday-div {
   position: relative;
@@ -58,4 +67,8 @@
 }
 .submit-btn {
   color: black;
+  border: 1px black solid;
+  border-radius: 5px;
+  background: #f2f2f2;
+  box-shadow: 4px 4px 8px #c9c9c9, -4px -4px 8px #ffffff;
 }

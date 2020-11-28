@@ -4,7 +4,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background: white;
+  background: #f2f2f2;
 }
 .userpage-div {
   position: absolute;
@@ -13,7 +13,7 @@
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   flex-direction: column;
   margin: 0;
@@ -21,7 +21,7 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 .logoutbtn-div {
-  height: 4%;
+  height: 6%;
   width: 90%;
   margin-bottom: 30px;
   display: flex;
@@ -31,8 +31,14 @@
 }
 .logout-btn {
   position: relative;
-  width: 30%;
+  width: 35%;
   height: 100%;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background: linear-gradient(145deg, #ffffff, #dadada);
+  box-shadow: 6px 6px 12px #b3b3b3, -6px -6px 12px #ffffff;
+  background: rgb(243, 50, 82);
 }
 
 .users-name {
@@ -40,9 +46,13 @@
   position: relative;
   width: 90%;
   height: 25%;
+  margin-bottom: 5%;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  border-radius: 17px;
+  background: #f2f2f2;
+  box-shadow: 8px 8px 6px #d0d0d0, -8px -8px 6px #ffffff;
 }
 .users-name p {
   position: relative;
@@ -51,32 +61,45 @@
 
 .userpageqrcode-div {
   position: relative;
-  width: 98%;
+  width: 350px;
   height: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-radius: 17px;
+  background: linear-gradient(145deg, #dadada, #ffffff);
+  box-shadow: 8px 8px 6px #d0d0d0, -8px -8px 6px #ffffff;
+  margin-bottom: 5%;
 }
 .userpageqrcode {
   position: relative;
   height: 324.8px;
   width: 337.5px;
   background-color: rgb(150, 144, 144);
+  border-radius: 17px;
+  margin-bottom: 5%;
 }
 
 .userpage-btns {
   position: relative;
   width: 90%;
   height: 10%;
-  background-color: blue;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+  border-radius: 17px;
+  background: #f2f2f2;
+  box-shadow: 8px 8px 6px #d0d0d0, -8px -8px 6px #ffffff;
 }
 .resetqr-btn,
 .userhistory-btn {
   height: 35px;
   width: 40%;
+  border: 1px gray solid;
+  outline: none;
+  border-radius: 38px;
+  background: #f2f2f2;
+  box-shadow: 10px 10px 14px #c9c9c9, -10px -10px 14px #ffffff;
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Styles/LandingPage.css";
 // import Axios from "axios";
-import auth from '../auth'
+import auth from "../auth";
 
 const LoginPage = () => {
   const [check, setCheck] = useState(false);
@@ -20,18 +20,15 @@ const LoginPage = () => {
       //if in user mode
       auth.accountType = "user";
       auth.email = document.getElementById("usernameInput").value;
-   
     } else {
       //if in admin mode
       auth.accountType = "admin";
       auth.email = document.getElementById("usernameInput").value;
-     
     }
-    auth.signIn(() => { 
-      console.log("push")
-      window.location.href = "/"
-    })
-
+    auth.signIn(() => {
+      console.log("push");
+      window.location.href = "/";
+    });
   };
 
   // const gotoAdmin = () => {
@@ -40,44 +37,59 @@ const LoginPage = () => {
   //     : (window.location.href = "/adminpage");
   // };
   return (
-    <form className="landingpage-form">
-      <label className="switch">
-        <input type="checkbox" onChange={handleCheck} defaultChecked={check} />
-        <span className="slider round"></span>
-      </label>
-      {check === false ? (
-        <p className="clientType">Logging In as User</p>
-      ) :(
-        <p className="clientType">Logging In as Admin</p>
-      )}
+    <div className="loginpagediv">
+      <form className="landingpage-form">
+        <div className="switcher-div">
+          {check === false ? (
+            <p className="loginclientType">Logging In as User</p>
+          ) : (
+            <p className="loginclientType">Logging In as Admin</p>
+          )}
+          <label className="switch">
+            <input
+              type="checkbox"
+              onChange={handleCheck}
+              defaultChecked={check}
+            />
+            <span className="slider round"></span>
+          </label>
+        </div>
+        <div className="loginpageelement-div">
+          <label className="loginpageelement" htmlFor="username">
+            Email
+          </label>
+          <input
+            className="loginpageelement"
+            type="text"
+            name="username"
+            id="usernameInput"
+          />
 
-      <label className="username-label login-label" htmlFor="username">
-        Email
-      </label>
-      <input
-        className="username-input login-input"
-        type="text"
-        name="username"
-        id="usernameInput"
-      />
+          <label className="loginpageelement" htmlFor="password">
+            Password
+          </label>
+          <input
+            id="passwordinput"
+            className="loginpageelement"
+            type="password"
+            name="password"
+          />
 
-      <label className="password-label login-label" htmlFor="password">
-        Password
-      </label>
-      <input
-        id="passwordinput"
-        className="password-input  login-input"
-        type="password"
-        name="password"
-      />
-
-      <button className="login-btn" type="button" onClick={loginHandler}>
-        Login
-      </button>
-      <p className="gotosignup">
-        Not yet have an account? <a href="/signuppage">Click here</a>
-      </p>
-    </form>
+          <button
+            className="loginpageelement"
+            type="button"
+            onClick={loginHandler}
+          >
+            Login
+          </button>
+        </div>
+        <div className="bottom-element">
+          <p className="gotosignup">
+            Not yet have an account? <a href="/signuppage">Click here</a>
+          </p>
+        </div>
+      </form>
+    </div>
   );
 };
 export default LoginPage;

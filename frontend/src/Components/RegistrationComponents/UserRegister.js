@@ -186,7 +186,7 @@ const UserRegister = (props) => {
           {isFormError.password ? <p>Password does not Match</p> : null}
         </div>
 
-        <input type="submit" value="Submit"></input>
+        <input type="submit" className="submit-btn" value="Submit"></input>
         <a>Already have an account? </a>
         <a href="#" onClick={changeSign}>
           {signState.prevSignData}

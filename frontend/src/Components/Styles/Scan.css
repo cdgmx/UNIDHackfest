@@ -18,4 +18,6 @@
   flex-direction: column;
   align-items: left;
   justify-content: flex-start;
+  color: lightgray;
+  margin-left: 5%;
 }

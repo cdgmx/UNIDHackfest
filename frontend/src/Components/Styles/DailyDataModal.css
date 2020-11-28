@@ -6,11 +6,12 @@
   height: 75%;
   width: 98%;
   z-index: 1;
-  background: yellow;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  background: #a9b2b7;
+  border-radius: 5px;
 }
 .closemodalbtn-div {
   position: relative;
@@ -27,6 +28,11 @@
   width: 35px;
   height: 35px;
   font-size: 1em;
+  border: none;
+  outline: none;
+  border-radius: 1px;
+  background: linear-gradient(145deg, #b5bec4, #98a0a5);
+  box-shadow: 2px 2px 5px #6e7477, -2px -2px 5px #e4f0f7;
 }
 .modaldetails-div {
   position: relative;
@@ -41,4 +47,9 @@
   position: relative;
   height: 35px;
   width: 95%;
+  border-radius: 1px;
+  background: linear-gradient(145deg, #b5bec4, #98a0a5);
+  box-shadow: 5px 5px 18px #6e7477, -5px -5px 18px #e4f0f7;
+  border: none;
+  outline: none;
 }

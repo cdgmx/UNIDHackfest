@@ -8,6 +8,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  background: #f2f2f2;
 }
 
 .adminform-div {
@@ -32,12 +33,13 @@
   position: relative;
   height: 10%;
   width: 100%;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  border-radius: 5px;
+  background: linear-gradient(145deg, #dadada, #ffffff);
+  box-shadow: 9px 9px 19px #c9c9c9, -9px -9px 19px #ffffff;
 }
 .adminsignup-title h1 {
   font-size: 26px;
@@ -58,10 +60,16 @@
   width: 80%;
   border: none;
   outline: none;
-  border-bottom: 1px solid gray;
   color: black;
+  border-radius: 5px;
+  background: #f2f2f2;
+  box-shadow: inset 4px 4px 8px #c9c9c9, inset -4px -4px 8px #ffffff;
+  padding: 10px;
 }
 
 .submit-btn {
   color: black;
+  border-radius: 5px;
+  background: #f2f2f2;
+  box-shadow: 6px 6px 13px #c9c9c9, -6px -6px 13px #ffffff;
 }
