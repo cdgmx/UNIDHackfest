@@ -1,0 +1,61 @@
+.userRegisterbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.formbox {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.userRegister-title {
+  position: relative;
+  height: 10%;
+  width: 100%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.userRegister-title h1 {
+  font-size: 26px;
+}
+.userinputs-div {
+  position: relative;
+  width: 98%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.userinput {
+  position: relative;
+  height: 35px;
+  width: 50%;
+  margin: 5px;
+  color: black;
+  border: none;
+  border-bottom: 1px solid gray;
+}
+.birthday-div {
+  position: relative;
+  display: flex;
+  width: 82.5%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.submit-btn {
+  color: black;
+}
