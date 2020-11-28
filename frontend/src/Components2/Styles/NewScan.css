@@ -1,0 +1,24 @@
+.newScan-container {
+  height: 100%;
+  width: 100%;
+  background-color: gray;
+}
+.newscan-title {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.qr-screen {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 5%;
+  height: 80%;
+  width: 90%;
+  background-color: red;
+}
+.qrbtn-div {
+  position: relative;
+  margin-top: 5%;
+}

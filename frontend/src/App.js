@@ -1,7 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import './Form.css';
 import Form from "./Form"
-import AdminMain from './Components/MainPage/AdminMain';
+import AdminMain2 from './Components/MainPage/AdminMain';
+
+
+import AdminPage from './Components/AdminPage';
+import UserPage from './Components/UserPage';
+
+
 import UserMain from './Components/MainPage/UserMain';
 import LandingPage from './Components/MainPage/LandingPage';
 import ProtectedRoute from './ProtectedRoute'
@@ -27,8 +33,8 @@ function App() {
                 <Switch>
                     <Route exact  path ="/" component ={LandingPage} />
                     <ProtectedRoute isForm = {true} exact path ="/form" component ={Form}/> 
-                    <ProtectedRoute isForm = {false} exact path ="/user" component ={UserMain}/>
-                    <ProtectedRoute  isForm = {false}  exact path ="/admin" component ={AdminMain}/> 
+                    <ProtectedRoute isForm = {false} exact path ="/user" component ={UserPage}/>
+                    <ProtectedRoute  isForm = {false}  exact path ="/admin" component ={AdminPage}/> 
                     <Route path ="*" component ={() => "404 not found hehe"} />
                 </Switch>
             

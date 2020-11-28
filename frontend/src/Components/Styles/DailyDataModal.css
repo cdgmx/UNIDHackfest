@@ -1,0 +1,26 @@
+.modal-div {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 60%;
+  width: 98%;
+  z-index: 1;
+  background: yellow;
+}
+
+.closemodal-btn {
+  position: absolute;
+  top: 2.5%;
+  right: 2.5%;
+  width: 25px;
+  height: 25px;
+  font-size: 15px;
+}
+.modaldetails-div {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  height: 90%;
+  width: 100%;
+}

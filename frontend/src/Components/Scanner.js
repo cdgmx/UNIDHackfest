@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 //QrScanner.WORKER_PATH = './qr-scanner-worker.min.js';
 import QrReader from 'react-qr-scanner'
 import "./Scanner.css";
-
+import auth from '../auth'
 
 
 
@@ -21,9 +21,8 @@ class Scanner extends Component {
       status:"None",
       result: 'No result',
       facingMode: "rear"
-    
     }
-
+    this.adminName = null
     
     this.handleScan = this.handleScan.bind(this)
   }
@@ -53,7 +52,8 @@ class Scanner extends Component {
       width: 320,
     }
 
-    
+   
+
     const  handleCamera = () => {
       if(this.state.facingMode == "front")
       {
@@ -100,9 +100,6 @@ class Scanner extends Component {
     return(
 
       <div>
-            
-
-
             <div className="box">
        
 
@@ -116,13 +113,13 @@ class Scanner extends Component {
         <button onClick = {handleCamera}>Change Camera to {this.state.facingMode}</button>      
         <button onClick = {submitScan}>Submit Scan</button>
         
-        <p>Store Name:{this.props.storeName} </p>
+        <p> Name:{this.adminName} </p>
 
         <p>{this.state.result}</p>
 
         <p>Status: {this.state.status}</p>
 
-        <p>Name: {this.state.name}</p>
+        <p>Client Name: {this.state.name}</p>
        
      
        </div>

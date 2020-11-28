@@ -85,40 +85,20 @@ function Form(props) {
   //this responds to the submit button that we created. so when the client clicked it, it will go here
   const handleSignIn = (e) => {
     e.preventDefault()
-    if (adminAcc == false){
-
-        auth.email = myInfo.clientEmail
-        auth.password = myInfo.clientPassword
-        auth.accountType = accType.currentAccName
-        
-        auth.login(() => { 
-            props.history.push("/user")
-            console.log("execute push")
-            })
-    }
-    else{
-     
-        Axios.post('http://localhost:3001/api/admin',  {userId:myInfo.clientEmail
-      }).then((response) =>{
-        console.log("admin")
-        if(response.data.err == "error")
-        {
-          alert("No data found in admin database")
-          
-        }
-        else{
-        alert("Success " + response.data.name)
-        
-        setMyInfo({ ...myInfo, 
-          storename : response.data.name
-        })
-
-        setHasAccount(true)
-        
-        }
-      })
-    } 
-  };
+    auth.email = myInfo.clientEmail
+    auth.password = myInfo.clientPassword
+    
+    if(accType.currentAccName == "User")  
+      auth.accountType = "user"
+    else 
+      auth.accountType = "admin"
+  
+    auth.signIn(() => { 
+      console.log("push")
+      props.history.push("/admin")
+    })
+    setHasAccount(true) 
+  }
 
 
   const handleValidation = () =>{
