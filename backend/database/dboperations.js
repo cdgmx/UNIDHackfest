@@ -61,11 +61,11 @@ async function verifyClient(client,email,password){
             if(client != "admins") results.qr = await QRCode.toString(results.qrkey,{type:'svg'})
 
             
-            let verify = await bcrypt.compare(password, results.password)
-            if(verify){
+            // let verify = await bcrypt.compare(password, results.password)
+            // if(verify){
                 return results
-            }
-            else return null
+            // }
+            // else return null
             
             //generating the qr code from the qrkey results given only for users
         

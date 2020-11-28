@@ -38,3 +38,10 @@
   height: 90%;
   width: 98%;
 }
+
+.history-div .history-main {
+  position: relative;
+  background: gray;
+  height: 90%;
+  width: 98%;
+}

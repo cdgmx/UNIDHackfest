@@ -86,7 +86,7 @@ const HistoryModal = ({ setHistoryModal }) => {
       <div className="history-div"> 
       
      
-        { loading ? <div style={{width: "700px", height: "520px" }}> <Chrono items={items}  mode="VERTICAL"  hideControls /> ) 
+        { loading ? <div  className = ".history-main " style={{width: "700px", height: "520px" }}> <Chrono items={items}  mode="VERTICAL"  hideControls /> ) 
             </div>
           : <></>
         }

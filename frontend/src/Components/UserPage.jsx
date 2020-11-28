@@ -3,7 +3,7 @@ import "../Components/Styles/UserPage.css";
 import auth from "../auth";
 import { Chrono } from "react-chrono";
 import HistoryModal from "../Components/HistoryModal";
-import Media from "react-media";
+
 
 const UserPage = (props) => {
   const [historyModal, setHistoryModal] = useState(null);
