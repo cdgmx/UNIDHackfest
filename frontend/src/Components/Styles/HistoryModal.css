@@ -1,0 +1,40 @@
+.historymodal-div {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  width: 98%;
+  height: 60%;
+  transform: translate(-50%, -50%);
+  background: lightgrey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.historyModalClosebtn-div {
+  position: relative;
+  height: 7.5%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.historyModalClosebtn {
+  position: absolute;
+  background: white;
+  height: 80%;
+  width: 10%;
+  font-size: 22px;
+  border: none;
+  outline: none;
+  right: 2.5%;
+  color: grey;
+}
+.history-div {
+  position: relative;
+  background: gray;
+  height: 90%;
+  width: 98%;
+}
