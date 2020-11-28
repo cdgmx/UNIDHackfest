@@ -7,7 +7,10 @@ import { Chrono } from "react-chrono";
 
 const UserPage = (props) => {
   const logoutHandler = () => {
-    window.location.href = "/";
+    auth.logout(()=>{ 
+      window.location.href = "/";
+    })
+
   };
 
   //////
@@ -107,15 +110,25 @@ const UserPage = (props) => {
         <p>Name:{info.name}</p>
         <p>Address: {info.address} {info.town} {info.province}</p>
         <p>Contact: {info.contact}</p>
-        <p>Birthday: Tristan John Girao</p>
-        {/*Change this to `Welcome : ${data.fullname}`*/}
+        <p>Birthday: {info.birthday}</p>
+        {/*Change this to `Welcome : ${data.fullname}`*/} 
         
         <p>Here's your QR CODE</p>
       </div>
-      <img src="" alt="QR Code Here" className="qr-code" />
-      <button type="button" className="resetqr-btn">
+      <div  className="qr-code" dangerouslySetInnerHTML={{ __html: info.qr}}/>
+      
+      <button type="button" className="resetqr-btn" onClick = {handleReset}>
         Reset QR
       </button>
+
+      
+      {/*  <div style={{width: "500px", height: "500px" }}>
+            { historyLoad ? ( <Chrono items={items}  mode="VERTICAL"  hideControls cardHeight = {300}/> ) : 
+            <> </>  //load only when historyLoad is true
+            } 
+            </div> */}
+
+
     </div>
   );
 };

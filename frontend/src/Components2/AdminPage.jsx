@@ -1,9 +1,74 @@
-import React, { useState, useEffect } from "react";
+import React, {useState,useEffect} from 'react'
+import auth from '../auth'
+import Scan from '../Scan'
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import * as ReactBootStrap from 'react-bootstrap'
+
+
+
+
+
 import "../Components/Styles/AdminPage.css";
 import NewScan from "../Components/NewScan";
 import ViewLog from "../Components/ViewLog";
 
-const AdminPage = () => {
+
+
+
+
+const AdminPage = (props) => {
+
+  const [scanned, setScanned] = useState([])
+  const [loading, setLoading] = useState(false)
+
+
+  const handleGetScan = async() =>{
+
+    const isAuth = await auth.isAuthenticated()
+    console.log("auth Done")
+    if(isAuth){
+    auth.getScanData(()=>{
+        console.log("retrieving")
+        // let x = Object.assign({},auth.scannedData)
+        // auth.scannedData
+        // console.log(x)
+        setScanned(auth.scannedData)
+        setLoading(true)
+    })
+    }
+ 
+}
+
+ 
+
+
+useEffect(()=>{
+    async function info (){
+        await auth.getInfoAdmin(()=>{   
+            console.log("auth.info.name")
+            console.log(auth.info)
+         })
+        }
+        info()
+    handleGetScan()
+    console.log("admin effect")
+
+},[])
+
+const columns = [
+    {dataField:"date", text: "Date"},
+    {dataField:"name", text: "Name"},
+    {dataField:"contact", text: "Contact"},
+    {dataField:"address", text: "Address", filter: textFilter()},
+    {dataField:"town", text: "Town", filter: textFilter()},
+    {dataField:"province", text: "Province", filter: textFilter()},
+]
+
   // states
   const [display, setDisplay] = useState(null);
   // this will change to 'Scanning QR' if Scanning QR function is running
