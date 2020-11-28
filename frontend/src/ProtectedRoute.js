@@ -36,7 +36,6 @@ const ProtectedRoute = ({component:Component, ...rest}) =>{
                         }}/>
                         : 
                         <Component {...props} />  
-                        
                         )
                     :
                         (
@@ -50,9 +49,7 @@ const ProtectedRoute = ({component:Component, ...rest}) =>{
                                 }
                             }}/>
                         )
-                    )    
-
-                     
+                    )          
             
         }/>
       

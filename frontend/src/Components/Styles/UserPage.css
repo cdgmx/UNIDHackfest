@@ -1,0 +1,27 @@
+.userpage-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.logout-btn {
+  position: absolute;
+  top: 10%;
+}
+
+.users-name {
+  position: absolute;
+  top: 15%;
+}
+
+.qr-code {
+  position: absolute;
+  top: 30%;
+  width: 90%;
+  height: 50%;
+  background-color: rgb(150, 144, 144);
+}
+.resetqr-btn {
+  position: absolute;
+  bottom: 10%;
+}

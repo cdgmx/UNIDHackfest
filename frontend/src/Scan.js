@@ -67,9 +67,6 @@ class Scanner extends Component {
 
     }
     
-
-
-
     return(
       <div>
       

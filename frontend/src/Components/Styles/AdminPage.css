@@ -1,0 +1,34 @@
+.admin-div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.topnav {
+  display: flex;
+  margin-top: 0;
+  margin-bottom: 10%;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  height: 10%;
+  width: 100%;
+  background-color: blue;
+}
+
+.main-div {
+  display: flex;
+  height: 70%;
+  width: 100%;
+  background-color: blue;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}

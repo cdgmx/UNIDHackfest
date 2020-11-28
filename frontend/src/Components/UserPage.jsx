@@ -1,12 +1,17 @@
 import React, {useState, useEffect,useRef} from 'react';
-import auth from '../../auth'
+import "../Components/Styles/UserPage.css";
+import auth from '../auth'
 import { Chrono } from "react-chrono";
 
- const UserMain = (props) => {
 
 
+const UserPage = (props) => {
+  const logoutHandler = () => {
+    window.location.href = "/";
+  };
 
-    const [qr, setQR] = useState(auth.info.qr)
+  //////
+  const [qr, setQR] = useState(auth.info.qr)
     const [info, setInfo] = useState({...auth.info})
 
     const [history, setHistory] = useState([])
@@ -89,40 +94,30 @@ import { Chrono } from "react-chrono";
             }
             setData()
       },[history]);
-    
-  
 
-    return(
-        <div>
-            <h3>Client ID:{auth.client_id}</h3>
-            <h3>Name:{info.name}</h3>
-            <h3>Address:{info.address} {info.town} {info.province}</h3>
-            <h3>Contact:{info.contact}</h3>
-            <h3>Birthday:{info.birthday}</h3>
-            <div className="Qr" dangerouslySetInnerHTML={{ __html: info.qr}}/>
-            <button 
-            onClick = { () => {
-                auth.logout(()=>{
-                props.history.push("/")
-                })
-            }}
+  /////
+  return (
+    <div className="userpage-div">
+      <button type="button" className="logout-btn" onClick={logoutHandler}>
+        LOGOUT
+      </button>
+      <div className="users-name">
+        <p>Welcome: Tristan John Girao</p>{" "}
 
-            >logout</button>
-            <button onClick = {handleUser}>User</button>
-            <button onClick = {handleAdmin}>Admin</button>    
-            <button onClick = {handleForm}>Form</button>  
-            <button onClick = {handleReset}>Reset QR</button>  
-            <div style={{width: "500px", height: "500px" }}>
-            { historyLoad ? ( <Chrono items={items}  mode="VERTICAL"  hideControls cardHeight = {300}/> ) : 
-            <> </>  //load only when historyLoad is true
-            } 
-            </div>
+        <p>Name:{info.name}</p>
+        <p>Address: {info.address} {info.town} {info.province}</p>
+        <p>Contact: {info.contact}</p>
+        <p>Birthday: Tristan John Girao</p>
+        {/*Change this to `Welcome : ${data.fullname}`*/}
+        
+        <p>Here's your QR CODE</p>
+      </div>
+      <img src="" alt="QR Code Here" className="qr-code" />
+      <button type="button" className="resetqr-btn">
+        Reset QR
+      </button>
+    </div>
+  );
+};
 
-
-        </div>
-    )
-
-}
-
-
-export default UserMain;
+export default UserPage;

@@ -1,0 +1,150 @@
+.landingpage-form {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 600px;
+  width: 400px;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 3px 3px 5px 6px rgb(231, 231, 231);
+  -moz-box-shadow: 3px 3px 5px 6px rgb(231, 231, 231);
+  box-shadow: 3px 3px 5px 6px rgb(231, 231, 231);
+  border-radius: 5px;
+}
+.login-label {
+  position: absolute;
+  font-family: verdana;
+  font-size: 15px;
+  font-weight: normal;
+  transform: translateX(-50%);
+  left: 50%;
+}
+.login-input {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  height: 40px;
+  width: 250px;
+  border: none;
+  border-bottom: 1px black solid;
+  outline: none;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  font-family: verdana;
+  font-size: 15px;
+  font-weight: normal;
+  color: grey;
+}
+
+.username-label {
+  top: 20%;
+}
+.username-input {
+  top: 25%;
+}
+.password-label {
+  top: 40%;
+}
+.password-input {
+  top: 45%;
+}
+
+.login-btn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 30%;
+  font-family: verdana;
+  font-size: 15px;
+  font-weight: normal;
+  height: 35px;
+  width: 100px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  -webkit-box-shadow: 1px 1px 2px 2px rgb(231, 231, 231);
+  -moz-box-shadow: 1px 1px 2px 2px rgb(231, 231, 231);
+  box-shadow: 1px 1px 2px 2px rgb(231, 231, 231);
+}
+.login-btn:hover {
+  -webkit-box-shadow: 1px 1px 1px 1px rgb(231, 231, 231);
+  -moz-box-shadow: 1px 1px 1px 1px rgb(231, 231, 231);
+  box-shadow: 1px 1px 1px 1px rgb(231, 231, 231);
+}
+.gotosignup {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  transform: translateX(-50%);
+}
+
+/* slider design */
+.switch {
+  position: absolute;
+  top: 2.5%;
+  right: 5%;
+  width: 50px;
+  height: 24px;
+  outline: none;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.clientType {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  font-family: Verdana;
+  color: rgb(44, 44, 250);
+  font-size: 12px;
+}
