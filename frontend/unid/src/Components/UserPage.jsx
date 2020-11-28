@@ -12,10 +12,14 @@ const UserPage = () => {
         LOGOUT
       </button>
       <div className="users-name">
-        <p>Welcome: //User's Fullname</p>
+        <p>Welcome: Tristan John Girao</p>{" "}
+        {/*Change this to `Welcome : ${data.fullname}`*/}
         <p>Here's your QR CODE</p>
       </div>
       <img src="" alt="QR Code Here" className="qr-code" />
+      <button type="button" className="resetqr-btn">
+        Reset QR
+      </button>
     </div>
   );
 };
