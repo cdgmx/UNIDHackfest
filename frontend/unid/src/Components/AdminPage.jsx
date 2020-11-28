@@ -6,10 +6,10 @@ import ViewLog from "../Components/ViewLog";
 const AdminPage = () => {
   // states
   const [display, setDisplay] = useState(null);
-  const [title, setTitle] = useState("SCAN QR"); // this will change to Scanning QR if Scanning QR function is running
+  // this will change to 'Scanning QR' if Scanning QR function is running
 
   const newScanHandler = () => {
-    setDisplay(<NewScan scanHandler={scanHandler} title={title} />);
+    setDisplay(<NewScan />); //scanHandler button to click to scan
   };
 
   //handlers
@@ -25,7 +25,6 @@ const AdminPage = () => {
   const adminLogoutHandler = () => {
     window.location.href = "/";
   };
-  const scanHandler = () => {};
 
   //return
   return (
@@ -45,7 +44,6 @@ const AdminPage = () => {
             className="topnav-btn"
             id="viewlog-btn"
             onClick={viewLogHandler}
-            title={title}
           >
             View Log
           </button>
@@ -66,12 +64,8 @@ const AdminPage = () => {
             Logout
           </button>
         </div>
-        <div className="maind-div">
-          {display === null ? (
-            <NewScan scanHandler={scanHandler} title={title} />
-          ) : (
-            display
-          )}
+        <div className="main-div">
+          {display === null ? <NewScan /> : display}
         </div>
       </div>
     </React.Fragment>

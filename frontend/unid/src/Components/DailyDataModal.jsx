@@ -3,36 +3,56 @@ import "../Components/Styles/DailyDataModal.css";
 
 class DailyDataModal extends Component {
   render() {
-    const { setModal, data } = this.props;
+    const { setModal /*data*/ } = this.props;
     return (
       <div className="modal-div">
         <button
           type="button"
           className="closemodal-btn"
-          onClick={() => console.log(data)}
+          // onClick={() => console.log(data)}
+          onClick={() => {
+            setModal(null);
+          }}
         >
           &times;
         </button>
-        <input type="text" name="" readOnly />
-        <input type="text" name="" value={data.gender} readOnly />
+        <input type="text" name="" value="Name" readOnly />
+        <input type="text" name="" value={/*data.gender*/ "Gender"} readOnly />
         <input
           type="text"
           name=""
-          value={`${data.birthmonth} ${data.birthday} ${data.birthyear}`}
+          value={
+            /*${data.birthmonth} ${data.birthday} ${data.birthyear}*/ "Birthday"
+          }
           readOnly
         />
-        <input type="text" name="" value={data.age} readOnly />
-        <input type="text" name="" value={data.email} readOnly />
-        <input type="text" name="" value={data.contactno} readOnly />
-        <input type="text" name="" value={data.barangay} readOnly />
-        <input type="text" name="" value={data.zone} readOnly />
-        <input type="text" name="" value={data.town} readOnly />
-        <input type="text" name="" value={data.province} readOnly />
-        <input type="text" name="" value={data.city} readOnly />
-        <input type="text" name="" value={data.region} readOnly />
+        <input type="text" name="" value={/*data.age*/ "Age"} readOnly />
+        <input type="text" name="" value={/*data.email*/ "email"} readOnly />
+        <input
+          type="text"
+          name=""
+          value={/*data.contactno*/ "contactno"}
+          readOnly
+        />
+        <input
+          type="text"
+          name=""
+          value={/*data.barangay*/ "barangay"}
+          readOnly
+        />
+        <input type="text" name="" value={/*data.zone*/ "zone"} readOnly />
+        <input type="text" name="" value={/*data.town*/ "town"} readOnly />
+        <input
+          type="text"
+          name=""
+          value={/*data.province*/ "province"}
+          readOnly
+        />
+        <input type="text" name="" value={/*data.city*/ "city"} readOnly />
+        <input type="text" name="" value={/*data.region*/ "region"} readOnly />
 
-        <img src="" alt="valid_id1" />
-        <img src="" alt="valid_id2" />
+        {/* <img src="" alt="valid_id1" />
+        <img src="" alt="valid_id2" /> */}
       </div>
     );
   }
