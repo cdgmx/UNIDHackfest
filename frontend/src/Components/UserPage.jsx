@@ -3,6 +3,7 @@ import "../Components/Styles/UserPage.css";
 import auth from "../auth";
 import { Chrono } from "react-chrono";
 import HistoryModal from "../Components/HistoryModal";
+import Media from "react-media";
 
 const UserPage = (props) => {
   const [historyModal, setHistoryModal] = useState(null);
@@ -104,9 +105,11 @@ const UserPage = (props) => {
   return (
     <div className="blockdiv">
       <div className="userpage-div">
-        <button type="button" className="logout-btn" onClick={logoutHandler}>
-          LOGOUT
-        </button>
+        <div className="logoutbtn-div">
+          <button type="button" className="logout-btn" onClick={logoutHandler}>
+            LOGOUT
+          </button>
+        </div>
         <div className="users-name">
           {/* <p>Welcome: Tristan John Girao</p> */}
 
@@ -120,10 +123,13 @@ const UserPage = (props) => {
 
           <p>Here's your QR CODE</p>
         </div>
-        <div
-          className="qr-code"
-          dangerouslySetInnerHTML={{ __html: info.qr }}
-        />
+
+        <div className="userpageqrcode-div">
+          <div
+            className="userpageqrcode"
+            dangerouslySetInnerHTML={{ __html: info.qr }}
+          />
+        </div>
 
         <div className="userpage-btns">
           <button type="button" className="resetqr-btn" onClick={handleReset}>

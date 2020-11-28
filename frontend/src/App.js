@@ -1,47 +1,61 @@
-import React, {useState, useEffect} from 'react';
-import './Form.css';
-import Form from "./Form"
-import AdminMain2 from './Components/MainPage/AdminMain';
+import React, { useState, useEffect } from "react";
+import "./Form.css";
+import Form from "./Form";
+import AdminMain2 from "./Components/MainPage/AdminMain";
 
+import AdminPage from "./Components/AdminPage";
+import UserPage from "./Components/UserPage";
+import LoginPage from "./Components/LoginPage";
 
-import AdminPage from './Components/AdminPage';
-import UserPage from './Components/UserPage';
-import LoginPage from './Components/LoginPage';
+import UserMain from "./Components/MainPage/UserMain";
+import LandingPage from "./Components/MainPage/LandingPage";
+import ProtectedRoute from "./ProtectedRoute";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import Axios from "axios";
 
-import UserMain from './Components/MainPage/UserMain';
-import LandingPage from './Components/MainPage/LandingPage';
-import ProtectedRoute from './ProtectedRoute'
-import {BrowserRouter,Route, Switch, Link} from 'react-router-dom'
-import Axios from 'axios';
+import Auth from "./auth";
 
-import Auth from './auth'
-
-import Loader from './Loader'
-
-
+import Loader from "./Loader";
+import UserRegister from "./Components/RegistrationComponents/UserRegister";
 
 function App() {
+  var token;
+  var refresh;
 
-    var token 
-    var refresh
- 
-    
-
-    return (
-        <div>
-                <Switch>
-                    <Route exact  path ="/" component ={LandingPage} />
-                    <ProtectedRoute currentPath = "form" exact path ="/form" component ={Form}/> 
-                    <ProtectedRoute currentPath = "user" exact path ="/user" component ={UserPage}/>
-                    <ProtectedRoute  currentPath = "admin"  exact path ="/admin" component ={AdminPage}/> 
-                    <ProtectedRoute  currentPath = "form" exact path ="/login" component ={LoginPage}/> 
-                
-                    <Route path ="*" component ={() => "404 not found hehe"} />
-                </Switch>
-        </div>
-    )   
+  return (
+    <div>
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <ProtectedRoute
+          currentPath="form"
+          exact
+          path="/form"
+          component={Form}
+        />
+        <ProtectedRoute
+          currentPath="user"
+          exact
+          path="/user"
+          component={UserPage}
+        />
+        <ProtectedRoute
+          currentPath="admin"
+          exact
+          path="/admin"
+          component={AdminPage}
+        />
+        <ProtectedRoute
+          currentPath="form"
+          exact
+          path="/login"
+          component={LoginPage}
+        />
+        <Route exact path="/signuppage" component={UserRegister} />
+        <Route path="*" component={() => "404 not found hehe"} />
+      </Switch>
+    </div>
+  );
 }
 
-
-//this is the name we want to be called in index.js, we can change the name 'App' to anything we like but just be aware that we need to change it also to the index.js also 
+//this is the name we want to be called in index.js, we can change the name 'App' to anything we like but just be aware that we need to change it also to the index.js also
 export default App;
