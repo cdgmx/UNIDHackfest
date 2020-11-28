@@ -86,7 +86,7 @@ router
                 res.send(data)
             }
             else{
-                throw "error in getClientInfo"
+                throw "error in getScanned"
             }
         }
         catch(error) {

@@ -46,7 +46,7 @@ class Auth{
             let response = await Axios.post('http://localhost:3001/form/signIn',{
             email:this.email,
             // password: this.password,
-            password: "123",
+            password: this.password,
             accountType:this.accountType
             })
             console.log("Login")
@@ -195,6 +195,15 @@ class Auth{
             this.authenticated = true
             this.client_id = response.data.client_id
             this.permission = response.data.permission
+            console.log("permission ")
+                console.log(this.permission)
+            if(this.permission == "0") { 
+                this.accountType = "user"}
+            else{
+                this.accountType = "admin"
+            }
+
+
             console.log("client id: " + response.data.client_id )  
         }
         catch (error){
@@ -209,6 +218,16 @@ class Auth{
                 console.log("Refreshed The Token") 
                 this.authenticated = true
                 this.client_id = response.data.client_id 
+
+                this.permission = response.data.permission
+                console.log("permission ")
+                console.log(this.permission)
+                if(this.permission == "0") { 
+                    this.accountType = "user"}
+                else{
+                    this.accountType = "admin"
+                }
+
                 console.log("client id: " + response.data.client_id ) 
             }
             catch (error){
