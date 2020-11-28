@@ -43,11 +43,11 @@ class Auth{
         try{
             let response = await Axios.get('http://localhost:3001/admin/scanned',  {qrkey: 503})
             console.log("Received Scan Data Response") 
-            console.log(response.data.scannedData)
+            console.log(response.data)
             this.scannedData = response.data
         }
         catch(error){
-            console.log("ERROR: " +  error.response.data.message)
+            console.log("ERROR: " +  error.response.data)
         }   
         cb()
 

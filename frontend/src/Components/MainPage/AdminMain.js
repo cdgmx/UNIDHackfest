@@ -77,11 +77,13 @@ const AdminMain = (props) => {
             storename = {auth.info.name}
             />
             <button 
+            
             onClick = { () => {
                 auth.logout(()=>{
                 props.history.push("/")
                 })
             }}
+
             > logout</button>
             <button onClick = {handleUser}>User</button>
             <button onClick = {handleAdmin}>Admin</button>   

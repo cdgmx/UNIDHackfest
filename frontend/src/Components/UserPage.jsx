@@ -7,7 +7,10 @@ import { Chrono } from "react-chrono";
 
 const UserPage = (props) => {
   const logoutHandler = () => {
-    window.location.href = "/";
+    auth.logout(()=>{ 
+      window.location.href = "/";
+    })
+
   };
 
   //////
@@ -117,6 +120,15 @@ const UserPage = (props) => {
       <button type="button" className="resetqr-btn" onClick = {handleReset}>
         Reset QR
       </button>
+
+      
+      {/*  <div style={{width: "500px", height: "500px" }}>
+            { historyLoad ? ( <Chrono items={items}  mode="VERTICAL"  hideControls cardHeight = {300}/> ) : 
+            <> </>  //load only when historyLoad is true
+            } 
+            </div> */}
+
+
     </div>
   );
 };
