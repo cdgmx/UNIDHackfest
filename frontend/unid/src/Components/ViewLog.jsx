@@ -10,7 +10,7 @@ const ViewLog = () => {
 
   useEffect(() => {
     //just delete this. there is a useEffect hook under with Axios
-    setDataList(["", "", "", "", ""]); //simulate lang nga may unod kuno
+    setDataList(["", "", "", "", "", "", "", "", "", ""]); //simulate lang nga may unod kuno
   }, []);
 
   //useEffect to fetch data from backend everytime the page is showing
@@ -45,25 +45,38 @@ const ViewLog = () => {
             className="data-div"
             onClick={expandViewHandler}
           >
-            <p className="username-p">
-              {/* {`${dl.fname} ${dl.mname} ${dl.lname}`} */}
-              username here
-            </p>
-            <p className="datescanned-p">datescanned here</p>
+            <div className="name-div">
+              <p className="name-p">
+                {/* {`${dl.fname} ${dl.mname} ${dl.lname}`} */}
+                Tristan John P. Girao
+              </p>
+            </div>
 
-            <p className="age-p">
-              {/* {dl.age} */}
-              age here
-            </p>
-
-            <p className="gender-p">
-              {/* {dl.gender} */}
-              gender here
-            </p>
+            <div className="userdetails-div">
+              <div className="detailtype-div">
+                <div className="detailtype-div1">Date Scanned :</div>
+                <div className="detailtype-div2">Age:</div>
+                <div className="detailtype-div3">Gender :</div>
+              </div>
+              <div className="detail-div">
+                <div className="detail-div1">
+                  {/*dl.dateScanned*/}
+                  September 01, 2020
+                </div>
+                <div className="detail-div2">
+                  {/* {dl.age} */}
+                  21
+                </div>
+                <div className="detail-div3">
+                  {/* {dl.gender} */}
+                  Male
+                </div>
+              </div>
+            </div>
           </div>
         ))}
       </div>
-      <div>{modal}</div>
+      {modal}
     </React.Fragment>
   );
 };

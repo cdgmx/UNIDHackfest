@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Styles/LandingPage.css";
 // import Axios from "axios";
 
-const LoginPage = ({ gotoAdmin }) => {
+const LoginPage = () => {
   const [check, setCheck] = useState(false);
 
   // const client = "";
@@ -36,7 +36,11 @@ const LoginPage = ({ gotoAdmin }) => {
   //   //   value: value,
   //   });
   // };
-
+  const gotoAdmin = () => {
+    check === false
+      ? (window.location.href = "/userpage")
+      : (window.location.href = "/adminpage");
+  };
   return (
     <form className="landingpage-form">
       <label className="switch">
