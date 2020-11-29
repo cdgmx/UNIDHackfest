@@ -26,6 +26,10 @@ const AdminRegister = (props) => {
     // console.log("email: " + initInformation.email);
   };
 
+  const handleChange = (e) => {
+    window.location.href = "/login"
+  };
+
   return (
     <div className="adminloginbox">
       <div className="adminform-div">
@@ -138,8 +142,8 @@ const AdminRegister = (props) => {
             {isFormError.password ? <p>Password does not Match</p> : null}
           </div>
           <input type="submit" value="Submit"></input>
-          <a href="#" onClick={changeSign}>
-            {signState.prevSignData}
+          <a href="#" onClick={handleChange}>
+            Login
           </a>
           <br></br>
           <a href="#" onClick={handleAccType}>

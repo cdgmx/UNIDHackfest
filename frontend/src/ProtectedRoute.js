@@ -28,7 +28,7 @@ const ProtectedRoute = ({component:Component, ...rest}) =>{
                 (
                    state.authenticated ?
                         (state.client == "user" ?
-                                ( rest.currentPath == "admin" || rest.currentPath == "form" ?
+                                ( rest.currentPath == "admin" || rest.currentPath == "login" ?
                                         (
                                             <Redirect to ={{
                                                 pathname: `/user`,
@@ -45,7 +45,7 @@ const ProtectedRoute = ({component:Component, ...rest}) =>{
                                     
                                 )
                             :
-                                (   rest.currentPath == "user" || rest.currentPath == "form" ?
+                                (   rest.currentPath == "user" || rest.currentPath == "login" ?
                                         (
                                             <Redirect to ={{
                                                 pathname: `/admin`,
@@ -66,7 +66,7 @@ const ProtectedRoute = ({component:Component, ...rest}) =>{
                    ( rest.currentPath == "admin" || rest.currentPath == "user" ?
                             (
                                 <Redirect to ={{
-                                    pathname: `/form`,
+                                    pathname: `/login`,
                                     state: {
                                         from:props.location.history
                                     }

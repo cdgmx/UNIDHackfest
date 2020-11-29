@@ -14,7 +14,8 @@ class DailyDataModal extends Component {
             onClick={() => {
               setModal(null);
               console.log("THIS IS DATA!!!!");
-              console.log(JSON.stringify(datalist));
+              console.log(this.props);
+
             }}
           >
             &times;
@@ -22,6 +23,7 @@ class DailyDataModal extends Component {
         </div>
         <div className="modaldetails-div">
           <input
+            key={datalist.id}
             type="text"
             name=""
             value={datalist.admin_id}

@@ -36,6 +36,11 @@ const UserRegister = (props) => {
     console.log("value: " + e.target.value);
   };
 
+
+  const handleChange = (e) => {
+    window.location.href = "/login"
+  };
+
   const getFocus = (e) => {
     console.log("Focus");
   };
@@ -188,8 +193,9 @@ const UserRegister = (props) => {
 
         <input type="submit" className="submit-btn" value="Submit"></input>
         <a>Already have an account? </a>
-        <a href="#" onClick={changeSign}>
-          {signState.prevSignData}
+        <a href="#" onClick={handleChange}>
+        Login
+        
         </a>
         <br></br>
         <a href="#" onClick={handleAccType}>

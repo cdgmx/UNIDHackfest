@@ -4,7 +4,7 @@ import Form from "./Form"
 import AdminPage from './Components/AdminPage';
 import UserPage from './Components/UserPage';
 import LoginPage from './Components/LoginPage';
-import LandingPage from './Components/MainPage/LandingPage';
+import LandingPage from './Components/LandingPage';
 import ProtectedRoute from './ProtectedRoute'
 import {BrowserRouter,Route, Switch, Link} from 'react-router-dom'
 
@@ -23,12 +23,12 @@ function App() {
     <div>
       <Switch>
         <Route exact path="/" component={LandingPage} />
-        <ProtectedRoute
-          currentPath="form"
+        {/* <ProtectedRoute
+          currentPath="login"
           exact
-          path="/form"
+          path="/login"
           component={Form}
-        />
+        /> */}
         <ProtectedRoute
           currentPath="user"
           exact
@@ -42,12 +42,12 @@ function App() {
           component={AdminPage}
         />
         <ProtectedRoute
-          currentPath="form"
+          currentPath="login"
           exact
           path="/login"
           component={LoginPage}
         />
-        <Route exact path="/signuppage" component={UserRegister} />
+        <Route exact path="/signuppage" component={Form} />
         <Route path="*" component={() => "404 not found hehe"} />
       </Switch>
     </div>

@@ -20,14 +20,16 @@ const LoginPage = () => {
       //if in user mode
       auth.accountType = "user";
       auth.email = document.getElementById("usernameInput").value;
+      auth.password = document.getElementById("passwordinput").value;
     } else {
       //if in admin mode
       auth.accountType = "admin";
       auth.email = document.getElementById("usernameInput").value;
+      auth.password = document.getElementById("passwordinput").value;
     }
     auth.signIn(() => {
       console.log("push");
-      window.location.href = "/";
+      window.location.href = "/admin";
     });
   };
 

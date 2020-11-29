@@ -191,7 +191,7 @@ function Form(props) {
       auth.accountType = "admin"
 
       auth.signUp(()=>{
-         
+        window.location.href = "/login"
       })
       alert("Registeration Submitted")
       //changeSign()
@@ -242,7 +242,7 @@ function Form(props) {
   return (
     
       <div className="App">
-              {signState.signIn ?
+              {/* {signState.signIn ?
               
                 <Login
                 setMyInfo = {setMyInfo}
@@ -254,7 +254,7 @@ function Form(props) {
                 accType = {accType}
                 handleSignIn = {handleSignIn}
                 />
-              :
+              : */}
               <Register
                 setMyInfo = {setMyInfo}
                 myInfo = {myInfo}
@@ -269,8 +269,8 @@ function Form(props) {
                 setSelectedDate = {setSelectedDate}
                 selectedDate = {selectedDate}
                 />
-              }
-           
+              {/* }
+            */}
       
       </div>
   

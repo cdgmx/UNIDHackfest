@@ -61,11 +61,11 @@ async function verifyClient(client,email,password){
             if(client != "admins") results.qr = await QRCode.toString(results.qrkey,{type:'svg'})
 
             
-            // let verify = await bcrypt.compare(password, results.password)
-            // if(verify){
+            let verify = await bcrypt.compare(password, results.password)
+            if(verify){
                 return results
-            // }
-            // else return null
+            }
+            else return null
             
             //generating the qr code from the qrkey results given only for users
         
@@ -116,14 +116,14 @@ async function postClientInfo(client, values){
         }
         else{
             sqlInsert = `INSERT INTO admins 
-            (email,name,address,town,province,contact,password)
-            VALUES (?,?,?,?,?,?,?)`
+            (email,name,address,town,province,contact,password,client_id)
+            VALUES (?,?,?,?,?,?,?,?)`
 
             sqlInsert2 = `INSERT INTO clients
             (client_id,permission)
             VALUES (?,?)`
 
-            response = await db.execute(sqlInsert,[email,name,address,town,province,contact,newpass])
+            response = await db.execute(sqlInsert,[email,name,address,town,province,contact,newpass,client_id])
             response2 = await db.execute(sqlInsert2,[client_id,'1'])
         }
 

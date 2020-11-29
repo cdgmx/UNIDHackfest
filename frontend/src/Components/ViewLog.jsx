@@ -43,7 +43,7 @@ const ViewLog = () => {
     handleGetScan();
   }, []);
 
-  const expandViewHandler = () => {
+  const expandViewHandler = (props) => {
     setModal(
       <DailyDataModal
         setModal={
@@ -51,10 +51,11 @@ const ViewLog = () => {
         } /*data={dataList} muni ang halin sa useEffect Axios*/
         // datalist={JSON.stringify(dataList)}
         datalist={dataList}
+
       />
     );
-    console.log("THIS IS DATAAA!");
-    console.log(JSON.stringify(dataList));
+    // console.log("THIS IS DATAAA!");
+    // console.log(JSON.stringify(dataList));
     // console.log("clicked");
   }; //click to view DailyDataModal
 
