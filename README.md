@@ -11,10 +11,10 @@
 <div align="center"> <img height="500" src="https://i.ibb.co/HgXz3Nx/Screenshot-25.png"/></div>
 
 ## Development server
-[2] Run `cd frontend` 
-[1] Run `npm run i` install dependencies
-[4] Run `cd ..` 
-[2] Run `cd backend` 
-[3] Run `npm run i` install dependencies
-[4] Run `cd ..` 
-[5] Run `npm run dev` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
+[1] Run `cd frontend` 
+##[2] Run `npm run i` install dependencies
+[3] Run `cd ..` 
+[4] Run `cd backend` 
+[5] Run `npm run i` install dependencies
+[6] Run `cd ..` 
+[7] Run `npm run dev` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
