@@ -12,9 +12,9 @@
 
 ## Development server
 [1] Run `cd frontend` <br />
-[2] Run `npm run i` install dependencies
-[3] Run `cd ..` 
-[4] Run `cd backend` 
-[5] Run `npm run i` install dependencies
-[6] Run `cd ..` 
+[2] Run `npm run i` install dependencies<br />
+[3] Run `cd ..` <br />
+[4] Run `cd backend` <br />
+[5] Run `npm run i` install dependencies<br />
+[6] Run `cd ..` <br />
 [7] Run `npm run dev` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
