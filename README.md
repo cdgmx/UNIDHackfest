@@ -7,7 +7,7 @@
   <a href="https://streamable.com/h25za5#">[App Demo]</a>
 </h2>
 
-<div align="center"> <img height="200" src="https://i.ibb.co/HgXz3Nx/Screenshot-25.png"/></div>
+<div align="center"> <img height="500" src="https://i.ibb.co/HgXz3Nx/Screenshot-25.png"/></div>
 
 ## Development server
 [2] Run `cd frontend` 
