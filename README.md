@@ -11,8 +11,8 @@
 <div align="center"> <img height="500" src="https://i.ibb.co/HgXz3Nx/Screenshot-25.png"/></div>
 
 ## Development server
-[1] Run `cd frontend` 
-##[2] Run `npm run i` install dependencies
+[1] Run `cd frontend` <br />
+[2] Run `npm run i` install dependencies
 [3] Run `cd ..` 
 [4] Run `cd backend` 
 [5] Run `npm run i` install dependencies
